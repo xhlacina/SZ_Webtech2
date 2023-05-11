@@ -1,0 +1,7 @@
+# Base mac files
+.DS_store
+
+# Idea files
+.idea/
+
+/.idea
