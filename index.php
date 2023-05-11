@@ -8,12 +8,12 @@ include "./src/includes.php";
 
 if (isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SESSION['loggedin']) && $_SESSION["loggedin"]) {
     if ($_SESSION['role'] == 'Student')
-        header("location: student.php");
+        header("location: /SZ/public/student/student.php");
     else
-        header("location: teacher.php");
+        header("location: /SZ/public/teacher/teacher.php");
 }
 
-view('header', ['title' => 'MainPage']);
+view('header', ['title' => 'Hlavná Stránka']);
 
 $database = new Database();
 $db = $database->getConnection();
@@ -44,15 +44,13 @@ if(isset($_POST["submit"])){
                 $sel->execute([$_SESSION["email"]]);
                 $user = $sel->fetchAll(PDO::FETCH_ASSOC);
                 if ($_SESSION['role'] === 'Student')
-                    header("location: student.php");
+                    header("location: /SZ/public/student/student.php");
                 else
-                    header("location: teacher.php");
-            } else {
-                $errmsg .= "<p>Nespravne meno alebo heslo.</p>";
-            }
-        } else {
-            $errmsg .= "<p>Nespravne meno alebo heslo.</p>";
-        }
+                    header("location: /SZ/public/teacher/teacher.php");
+            } else
+                $errmsg .= "<p style='color: red'>Nesprávne meno alebo heslo.</p>";
+        } else
+            $errmsg .= "<p style='color: red'>Nesprávne meno alebo heslo.</p>";
     } else
         echo "<p>Ups. Nieco sa pokazilo!</p>";
 
@@ -116,11 +114,4 @@ if(isset($_POST["submit"])){
         </div>
     </div>
 </section>
-<script type="text/javascript"
-        charset="utf8"
-        src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous">
-</script>
 
