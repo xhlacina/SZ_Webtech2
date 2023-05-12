@@ -1,5 +1,4 @@
 FROM php:8.2.5-apache
-#FROM mysql:latest
 
 # Install necessary packages
 RUN apt-get update && \
@@ -23,13 +22,6 @@ RUN docker-php-ext-install \
 
 # Enable Apache modules
 RUN a2enmod rewrite
-
-# Copy project files to container
-#COPY init.sql /docker-entrypoint-initdb.d/
-#COPY . /var/www/html/
-#
-## Set working directory
-#WORKDIR /var/www/html/
 
 # Expose port and start Apache server
 EXPOSE 80

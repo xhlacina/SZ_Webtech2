@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `semestralne`
+-- Database: `mysql`
 --
 
 -- --------------------------------------------------------
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `users`
 --
-
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
                          `id` int NOT NULL,
                          `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
@@ -41,8 +41,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `password`, `email`, `role`) VALUES
-                                                                               (4, 'Leos', 'Mares', 'pass', 'leos@jojka', 'Ucitel'),
-                                                                               (5, 'Jozef', 'Vajda', 'pass', 'vajda@cigi', 'Student');
+                                                                               (4, 'Peter', 'Mares', 'pass', 'teacher', 'Ucitel'),
+                                                                               (5, 'Jozef', 'Vajda', 'pass', 'student', 'Student');
 
 --
 -- Indexes for dumped tables
