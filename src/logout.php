@@ -2,8 +2,8 @@
 session_start();
 
 session_unset();
-session_regenerate_id(true);
+session_regenerate_id(tsrue);
 session_destroy();
 
-header("Location: /SZ/index.php");
+header("Location: /index.php");
 

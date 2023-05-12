@@ -16,8 +16,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" integrity="sha512-YFENbnqHbCRmJt5d+9lHimyEMt8LKSNTMLSaHjvsclnZGICeY/0KYEeiHwD1Ux4Tcao0h60tdcMv+0GljvWyHg=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer"/>
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />-->
-    <link rel="shortcut icon" type="image/x-icon" href="./../../icons/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon.ico">
     <title><?= $title ?? 'Hlavná Stránka' ?></title>
 </head>
 <body>

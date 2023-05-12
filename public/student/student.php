@@ -10,18 +10,18 @@ if ((isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SE
     $surname = $_SESSION['surname'];
     $role = $_SESSION['role'];
 } else
-    header('Location: /SZ/index.php');
+    header('Location: /index.php');
 view('header', ['title' => 'Student']);
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-white">
     <div class="container-fluid d-flex justify-content-between">
-        <a class="navbar-brand" href="https://site104.webte.fei.stuba.sk/SZ/index.php"><img src="../../icons/STU-FEI-logo.png" alt="logo" style="width: 200px; height: 80px"></a>
+        <a class="navbar-brand" href="/public/student/student.php"><img src="https://i.imgur.com/bw4kZxa.png" alt="Logo" title="Logo" style="width: 200px; height: 80px"/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div style="color: #7676a7" class="navbar-brand ms-auto">
             <?php echo $email?>
-            <a style="color: #ff3333" href="https://site104.webte.fei.stuba.sk/SZ/src/logout.php">
+            <a style="color: #ff3333" href="/src/logout.php">
                 <i class="fa-solid fa-right-from-bracket"></i>
             </a>
         </div>
