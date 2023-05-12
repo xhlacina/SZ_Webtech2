@@ -8,9 +8,9 @@ include "./src/includes.php";
 
 if (isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SESSION['loggedin']) && $_SESSION["loggedin"]) {
     if ($_SESSION['role'] == 'Student')
-        header("location: /SZ/public/student/student.php");
+        header("location: ./public/student/student.php");
     else
-        header("location: /SZ/public/teacher/teacher.php");
+        header("location: ./public/teacher/teacher.php");
 }
 
 view('header', ['title' => 'Hlavná Stránka']);
@@ -44,9 +44,9 @@ if(isset($_POST["submit"])){
                 $sel->execute([$_SESSION["email"]]);
                 $user = $sel->fetchAll(PDO::FETCH_ASSOC);
                 if ($_SESSION['role'] === 'Student')
-                    header("location: /SZ/public/student/student.php");
+                    header("location: ./public/student/student.php");
                 else
-                    header("location: /SZ/public/teacher/teacher.php");
+                    header("location: ./public/teacher/teacher.php");
             } else
                 $errmsg .= "<p style='color: red'>Nesprávne meno alebo heslo.</p>";
         } else
@@ -60,7 +60,7 @@ if(isset($_POST["submit"])){
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="https://site104.webte.fei.stuba.sk/SZ/index.php"><img src="./icons/STU-FEI-zfv.png" alt="logo" style="width: 200px; height: 80px"></a>
+        <a class="navbar-brand" href="index.php"><img src="icons/STU-FEI-logo.png" alt="logo" style="width: 200px; height: 80px"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
