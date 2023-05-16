@@ -82,7 +82,7 @@ if(isset($_POST["submit"])){
                             <form class="mx-1 mx-md-4" method="post">
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="email">Email</label>
+                                    <label class="form-label" for="email">Email :)</label>
                                     <input type="text" id="email" name="email" class="form-control" required/>
                                     <div class="invalid-feedback">
                                         Zadaj spravny email.
