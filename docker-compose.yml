@@ -7,7 +7,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ../SZ:/var/www/html
+      - ../SZ_Webtech2:/var/www/html
     depends_on:
       - mysql
   mysql:
