@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('#allStudentsTable').DataTable({
+        "dom": 'Bfrtip',
         "order": [[1, "desc" ]],
         // ordering type by asc & year col
         "columnDefs": [
@@ -13,7 +14,7 @@ $(document).ready(function () {
             null,
         ],
         buttons: [
-            'csv'
+            'csv',
         ],
         "paging": true,
         "info": true,
