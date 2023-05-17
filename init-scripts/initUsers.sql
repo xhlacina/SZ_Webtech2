@@ -34,8 +34,9 @@ CREATE TABLE `assignments` (
   `number` int NOT NULL,
   `submited` tinyint NOT NULL,
   `result` varchar(45) NOT NULL,
-  `points` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+  `points` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 DROP TABLE IF EXISTS `students`;
@@ -44,8 +45,9 @@ CREATE TABLE `students` (
   `name` varchar(45) NOT NULL,
   `recieved` int DEFAULT NULL,
   `submited` int DEFAULT NULL,
-  `points` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+  `points` int DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `students`
@@ -64,16 +66,6 @@ INSERT INTO `webtech2`.`students` (`id`, `name`, `recieved`, `submited`, `points
 -- Indexes for table `students`
 --
 
-ALTER TABLE `students`
-    ADD PRIMARY KEY (`id`)
-
---
--- AUTO_INCREMENT for table `assignments`
---
-
-ALTER TABLE `assignments`
-    MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- Indexes for dumped tables
 --
@@ -81,9 +73,6 @@ ALTER TABLE `assignments`
 --
 -- Indexes for table `assignments`
 --
-
-ALTER TABLE `assignments`
-    ADD PRIMARY KEY (`id`)
 
 
 DROP TABLE IF EXISTS `users`;
@@ -101,7 +90,6 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `password`, `email`, `role`) VALUES
-                                                                               (3, 'Peter', 'Mares', 'pass', 'a', 'Ucitel')
                                                                                (4, 'Peter', 'Mares', 'pass', 'teacher', 'Ucitel'),
                                                                                (5, 'Jozef', 'Vajda', 'pass', 'student', 'Student');
 
