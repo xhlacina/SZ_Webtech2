@@ -12,7 +12,7 @@ if ((isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SE
 } else {
     header('Location: /SZ/index.php');
 }
-view('header', ['title' => 'Ucitel']);
+view('header', ['title' => 'Info o studentovi']);
 ?>
 
 <!DOCTYPE html>
@@ -45,11 +45,11 @@ view('header', ['title' => 'Ucitel']);
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-1 col-md-4 col-sm-12">
+            <div class="col-lg-3 col-md-4 col-sm-12">
                 <div class="col-lg-3 col-md-4 col-sm-12">
                     <div class="list-group">
                         <a href="teacher.php" class="list-group-item list-group-item-action active">Vsetci studenti</a>
-                        <a href="studentInfo.php" class="list-group-item list-group-item-action disabled">Student</a>
+                        <a href="#" class="list-group-item list-group-item-action">Meno Studenta</a>
                     </div>
                 </div>
             </div>
@@ -57,15 +57,16 @@ view('header', ['title' => 'Ucitel']);
                 <!-- Main content goes here -->
 
                 <div class="container">
-                    <table id="allStudentsTable" class="table table-striped">
-                        <h1>Vsetci studenti</h1>
+                    <table id="oneStudentTable" class="table table-striped">
+                        <h1>Meno studenta</h1>
                         <thead>
                             <tr>
-                                <th>Meno študenta</th>
-                                <th>Počet vypísaných úloh</th>
-                                <th>Počet odovzdaných úloh</th>
-                                <th>Získaný počet bodov</th>
-                                <th>Maximálny počet bodov</th>
+                                <th>Meno Sady Úloh</th>
+                                <th>Číslo úlohy</th>
+                                <th>Stav úlohy</th>
+                                <th>Správnosť výsledku</th>
+                                <th>Počet získaných bodov za príklad</th>
+                                <th>Max. počet bodov za príklad</th>
                             </tr>
                         </thead>
                         <tbody id="table-content">
@@ -75,18 +76,28 @@ view('header', ['title' => 'Ucitel']);
                             
                             ?>
                             <tr>
-                                <td> <a href="studentInfo.php">Adam Augustín</a> </td>
-                                <td>7</td>
+                                <td>Geoniometria</td>
+                                <td>1</td>
+                                <td>odovzdaný</td>
+                                <td>nespravny - cerveny bg</td>
                                 <td>0</td>
-                                <td>0</td>
-                                <td>14</td>
+                                <td>2</td>
                             </tr>
                             <tr>
-                                <td> <a href="studentInfo.php">Vladys Hlačina</a> </td>
+                                <td>Pravdepodobnost</td>
                                 <td>4</td>
+                                <td>neodovzdany</td>
+                                <td>neodovzdany</td>
+                                <td>0</td>
                                 <td>3</td>
-                                <td>6</td>
-                                <td>8</td>
+                            </tr>
+                            <tr>
+                                <td>Pravdepodobnost</td>
+                                <td>2</td>
+                                <td>odovzdaný</td>
+                                <td>spravny - zeleny bg</td>
+                                <td>3</td>
+                                <td>3</td>
                             </tr>
                         </tbody>
                     </table>
