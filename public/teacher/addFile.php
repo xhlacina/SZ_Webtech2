@@ -12,17 +12,20 @@ if ((isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SE
 } else {
     header('Location: /SZ/index.php');
 }
-view('header', ['title' => 'Učiteľ']);
+view('header', ['title' => 'Ucitel']);
 ?>
 
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Učiteľ</title>
+    
+
+
+    <title>Document</title>
 </head>
 <body>
     
@@ -45,49 +48,27 @@ view('header', ['title' => 'Učiteľ']);
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="col-lg-6 col-md-4 col-sm-12">
                     <div class="list-group">
-                        <a href="teacher.php" class="list-group-item list-group-item-action active">Všetci studenti</a>
+                        <a href="teacher.php" class="list-group-item list-group-item-action">Všetci študenti</a>
                         <a href="studentInfo.php" class="list-group-item list-group-item-action disabled">Študent</a>
-                        <a href="addFile.php" class="list-group-item list-group-item-action">Pridať súbor</a>
+                        <a href="addFile.php" class="list-group-item list-group-item-action active">Pridať súbor</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-9 col-md-8 col-sm-12">
                 <!-- Main content goes here -->
 
-                <div class="container">
-                    <table id="allStudentsTable" class="table table-striped">
-                        <h1>Všetci študenti</h1>
-                        <thead>
-                            <tr>
-                                <th>Meno študenta</th>
-                                <th>Počet vypísaných úloh</th>
-                                <th>Počet odovzdaných úloh</th>
-                                <th>Získaný počet bodov</th>
-                                <th>Maximálny počet bodov</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-content">
-                            <?php
-                            
-                                
-                            
-                            ?>
-                            <tr>
-                                <td> <a href="studentInfo.php">Adam Augustín</a> </td>
-                                <td>7</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>14</td>
-                            </tr>
-                            <tr>
-                                <td> <a href="studentInfo.php">Vladys Hlačina</a> </td>
-                                <td>4</td>
-                                <td>3</td>
-                                <td>6</td>
-                                <td>8</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="container text-center">
+                        <label for="exerciseSelect">Súbor: </label>
+                        <select name="exerciseSelect" id="exercises">
+                            <option value="Ex1">file 1</option>
+                            <option value="Ex2">file 2</option>
+                        </select>
+                        <br><br>
+                        <label for="points">Počet bodov za príklady v súbore: </label>
+                        <input type="number" name="points" id="points">
+                        <br><br>
+                        <button type="submit">Pridať súbor</button>
+                    </form>
                 </div>
 
 
