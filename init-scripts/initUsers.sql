@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `users`
 --
-
+DROP TABLE IF EXISTS `assignments`;
 CREATE TABLE `assignments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
@@ -46,6 +46,7 @@ CREATE TABLE `students` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+DROP TABLE IF EXISTS `student_assignment`;
 CREATE TABLE `student_assignment` (
   `id` int NOT NULL AUTO_INCREMENT,
   `student_id` int NOT NULL,
