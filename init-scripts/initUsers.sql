@@ -26,6 +26,66 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `users`
 --
+
+DROP TABLE IF EXISTS `assignments`;
+CREATE TABLE `assignments` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) NOT NULL,
+  `number` int NOT NULL,
+  `submited` tinyint NOT NULL,
+  `result` varchar(45) NOT NULL,
+  `points` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+DROP TABLE IF EXISTS `students`;
+CREATE TABLE `students` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) NOT NULL,
+  `recieved` int DEFAULT NULL,
+  `submited` int DEFAULT NULL,
+  `points` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `webtech2`.`students` (`id`, `name`, `recieved`, `submited`, `points`) VALUES ('1', 'Martin Krivko', '1', '1', '2'),
+                                                                                          ('2', 'Adam Gusto', '0', '0', '0'),
+                                                                                          ('3', 'Vladimir Vladys', '4', '3', '8'),
+                                                                                          ('4', 'Dominik IDK', '2', '0', '0');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `students`
+--
+
+ALTER TABLE `students`
+    ADD PRIMARY KEY (`id`)
+
+--
+-- AUTO_INCREMENT for table `assignments`
+--
+
+ALTER TABLE `assignments`
+    MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `assignments`
+--
+
+ALTER TABLE `assignments`
+    ADD PRIMARY KEY (`id`)
+
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
                          `id` int NOT NULL,
@@ -41,6 +101,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `surname`, `password`, `email`, `role`) VALUES
+                                                                               (3, 'Peter', 'Mares', 'pass', 'a', 'Ucitel')
                                                                                (4, 'Peter', 'Mares', 'pass', 'teacher', 'Ucitel'),
                                                                                (5, 'Jozef', 'Vajda', 'pass', 'student', 'Student');
 
@@ -70,26 +131,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
-CREATE TABLE `assignments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `type` varchar(45) NOT NULL,
-  `number` int NOT NULL,
-  `submited` tinyint NOT NULL,
-  `result` varchar(45) NOT NULL,
-  `points` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
-
-CREATE TABLE `students` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
-  `recieved` int DEFAULT NULL,
-  `submited` int DEFAULT NULL,
-  `points` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
-
-INSERT INTO `webtech2`.`students` (`id`, `name`, `recieved`, `submited`, `points`) VALUES ('1', 'Martin Krivko', '1', '1', '2'),
-                                                                                          ('2', 'Adam Gusto', '0', '0', '0'),
-                                                                                          ('3', 'Vladimir Vladys', '4', '3', '8'),
-                                                                                          ('4', 'Dominik IDK', '2', '0', '0');

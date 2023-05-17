@@ -18,6 +18,10 @@ view('header', ['title' => 'Student']);
 $database = new Database();
 $db = $database->getConnection();
 
+$query = 'SELECT * FROM users';
+$stmt = $db->query($query); 
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 function parseLatexFile($filename) {
     // 1. Load the LaTeX file
     $content = file_get_contents($filename);
@@ -61,8 +65,6 @@ function getRandomTask($filename){
 }
 
 ?>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
 <nav class="navbar navbar-expand-lg navbar-dark bg-white">
     <div class="container-fluid d-flex justify-content-between">
         <a class="navbar-brand" href="/public/student/student.php"><img src="https://i.imgur.com/bw4kZxa.png" alt="Logo" title="Logo" style="width: 200px; height: 80px"/></a>
@@ -82,44 +84,13 @@ function getRandomTask($filename){
         <div class="col-lg-3 col-md-4 col-sm-12">
             <div class="col-lg-3 col-md-4 col-sm-12">
                 <div class="list-group">
-                <a href="student.php" class="list-group-item list-group-item-action active ">Prehľad príkladov</a>
-                    <a href="generate.php" class="list-group-item list-group-item-action ">Vygeneruj príklad</a>
+                    <a href="student.php" class="list-group-item list-group-item-action ">Prehľad príkladov</a>
+                    <a href="generate." class="list-group-item list-group-item-action active">Vygeneruj príklad</a>
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-md-10 col-sm-12">
+        <div class="col-lg-9 col-md-8 col-sm-12">
             <!-- Main content goes here -->
-            <div class="container">
-                    <table id="allAssignments" class="table table-striped">
-                    <thead>
-                            <tr>
-                                <th>Meno Sady Úloh</th>
-                                <th>Číslo úlohy</th>
-                                <th>Stav úlohy</th>
-                                <th>Počet získaných bodov za príklad</th>
-                                <th>Max. počet bodov za príklad</th>
-                            </tr>
-                        </thead>
-                        <?php 
-                            $stmt = $db->query( 'SELECT * FROM assignments'); 
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            if(sizeof($result)==0){
-                                echo"Nemáte zadané žiadne príklady";
-                            }else{
-                                foreach ($results as $result){
-                                    echo "<tr><td>" . $result["type"]  
-                                    . "</td><td>".$result["number"] 
-                                    . "</td><td>".$result["submited"] 
-                                    . "</td><td>".$result["result"] 
-                                    . "</td><td>".$result["points"]
-                                    ."</td></tr>";
-                                }
-                            }
-                                    
-                        
-                        ?>
-                    </table>
-                </div>
         </div>
     </div>
 </div>
