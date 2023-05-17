@@ -45,11 +45,12 @@ view('header', ['title' => 'Info o studentovi']);
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-12">
-                <div class="col-lg-3 col-md-4 col-sm-12">
+            <div class="col-lg-2 col-md-4 col-sm-12">
+                <div class="col-lg-6 col-md-4 col-sm-12">
                     <div class="list-group">
-                        <a href="teacher.php" class="list-group-item list-group-item-action active">Vsetci studenti</a>
-                        <a href="#" class="list-group-item list-group-item-action">Meno Studenta</a>
+                        <a href="teacher.php" class="list-group-item list-group-item-action ">Všetci študenti</a>
+                        <a href="#" class="list-group-item list-group-item-action active">Meno Študenta</a>
+                        <a href="addFile.php" class="list-group-item list-group-item-action">Pridať súbor</a>
                     </div>
                 </div>
             </div>
@@ -58,10 +59,10 @@ view('header', ['title' => 'Info o studentovi']);
 
                 <div class="container">
                     <table id="oneStudentTable" class="table table-striped">
-                        <h1>Meno studenta</h1>
+                        <h1>Meno študenta</h1>
                         <thead>
                             <tr>
-                                <th>Meno Sady Úloh</th>
+                                <th>Meno sady úloh</th>
                                 <th>Číslo úlohy</th>
                                 <th>Stav úlohy</th>
                                 <th>Správnosť výsledku</th>
