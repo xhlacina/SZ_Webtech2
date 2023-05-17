@@ -4,6 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+require_once('../../config/Database.php');
+$database = new Database();
+$db = $database->getConnection();
+
 if ((isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SESSION['loggedin']) && $_SESSION["loggedin"]) && $_SESSION['role'] == 'Ucitel') {
     $email = $_SESSION['email'];
     $name = $_SESSION['name'];
@@ -67,6 +71,14 @@ view('header', ['title' => 'Ucitel']);
                         <label for="points">Počet bodov za príklady v súbore: </label>
                         <input type="number" name="points" id="points">
                         <br><br>
+                        <label for="ifDeadline">Chcete pridat deadline odovzdania?</label>
+                        <input type="checkbox" name="ifDeadline" id="deadlineCheckbox" onclick="checkboxFunction()">
+                        <br><br>
+                        <div id="deadline" class="d-none">
+                            <label for="deadline">Datum deadline: </label>
+                            <input type="date" name="deadline" id="deadlineDate">
+                            <br><br>
+                        </div>
                         <button type="submit">Pridať súbor</button>
                     </form>
                 </div>
@@ -92,6 +104,7 @@ view('header', ['title' => 'Ucitel']);
     <script src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.13.4/af-2.5.3/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/cr-1.6.2/date-1.4.1/fc-4.2.2/fh-3.3.2/kt-2.9.0/r-2.4.1/rg-1.3.1/rr-1.3.3/sc-2.1.1/sb-1.4.2/sp-2.1.2/sl-1.6.2/sr-1.2.2/datatables.min.js"></script>
     
     <script src="../tableLogic.js"></script>
+    <script src="../formLogic.js"></script>
 
 </body>
 </html>

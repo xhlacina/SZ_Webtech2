@@ -4,6 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+require_once('../../config/Database.php');
+$database = new Database();
+$db = $database->getConnection();
+
 if ((isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SESSION['loggedin']) && $_SESSION["loggedin"]) && $_SESSION['role'] == 'Ucitel') {
     $email = $_SESSION['email'];
     $name = $_SESSION['name'];
@@ -69,23 +73,31 @@ view('header', ['title' => 'Učiteľ']);
                         <tbody id="table-content">
                             <?php
                             
+                                try{
+                                    
+                                    
+                                
+                                    $query = " SELECT name, recieved, submited, points FROM webtech2.students ";
+                                    $stmt = $db->query($query); 
+                                    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
+                                    
+                                    foreach($results as $result){
+                                        echo "<tr><td>".$result["name"]."</td><td>"
+                                        .$result["recieved"]."</td><td>"
+                                        .$result["submited"]."</td><td>"
+                                        .$result["points"]."</td><td>"
+                                        .$result["points"]."</td></tr>";
+                                        
+                                    }
+                                
+                                }catch(PDOException $e){
+                                    echo $e->getMessage();
+                                }
+
                                 
                             
                             ?>
-                            <tr>
-                                <td> <a href="studentInfo.php">Adam Augustín</a> </td>
-                                <td>7</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>14</td>
-                            </tr>
-                            <tr>
-                                <td> <a href="studentInfo.php">Vladys Hlačina</a> </td>
-                                <td>4</td>
-                                <td>3</td>
-                                <td>6</td>
-                                <td>8</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>
