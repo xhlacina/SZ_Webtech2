@@ -27,17 +27,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `assignments`;
 CREATE TABLE `assignments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type` varchar(45) NOT NULL,
   `number` int NOT NULL,
-  `submited` tinyint NOT NULL,
-  `result` varchar(45) NOT NULL,
   `points` int NOT NULL,
+  `date` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
@@ -48,6 +45,22 @@ CREATE TABLE `students` (
   `points` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `student_assignment` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `student_id` int NOT NULL,
+  `assignment_id` int NOT NULL,
+  `submited` tinyint DEFAULT NULL,
+  `result` text NOT NULL,
+  `correct` tinyint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_student_idx` (`student_id`),
+  KEY `fk_assignment_idx` (`assignment_id`),
+  CONSTRAINT `fk_assignment` FOREIGN KEY (`assignment_id`) REFERENCES `assignments` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_student` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 
 --
 -- Dumping data for table `students`

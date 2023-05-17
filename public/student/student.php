@@ -60,6 +60,15 @@ function getRandomTask($filename){
     ];
 }
 
+function isSubmited($n){
+    if($n ==0){
+        return "Neodovzdaná";
+    }
+    if($n ==1){
+        return "Odovzdaná";
+    }
+}
+var_dump(parseLatexFile('../../exams/odozva02pr.tex'));
 ?>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
@@ -79,8 +88,8 @@ function getRandomTask($filename){
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-3 col-md-4 col-sm-12">
-            <div class="col-lg-3 col-md-4 col-sm-12">
+        <div class="col-lg-2 col-md-4 col-sm-12">
+            <div class="col-lg-6 col-md-4 col-sm-12">
                 <div class="list-group">
                 <a href="student.php" class="list-group-item list-group-item-action active ">Prehľad príkladov</a>
                     <a href="generate.php" class="list-group-item list-group-item-action ">Vygeneruj príklad</a>
@@ -100,16 +109,17 @@ function getRandomTask($filename){
                                 <th>Max. počet bodov za príklad</th>
                             </tr>
                         </thead>
+                        <tbody id="table-content">
                         <?php 
                             $stmt = $db->query( 'SELECT * FROM assignments'); 
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                            if(sizeof($result)==0){
-                                echo"Nemáte zadané žiadne príklady";
+                            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            if(sizeof($results)==0){
+                                echo "<tr><td colspan='5' class='text-center'>Nemáte žiadne príklady</td></tr>";
                             }else{
                                 foreach ($results as $result){
                                     echo "<tr><td>" . $result["type"]  
                                     . "</td><td>".$result["number"] 
-                                    . "</td><td>".$result["submited"] 
+                                    . "</td><td>".isSubmited($result["submited"])
                                     . "</td><td>".$result["result"] 
                                     . "</td><td>".$result["points"]
                                     ."</td></tr>";
@@ -118,6 +128,7 @@ function getRandomTask($filename){
                                     
                         
                         ?>
+                        </tbody>
                     </table>
                 </div>
         </div>
