@@ -88,3 +88,8 @@ CREATE TABLE `students` (
   `points` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+INSERT INTO `webtech2`.`students` (`id`, `name`, `recieved`, `submited`, `points`) VALUES ('1', 'Martin Krivko', '1', '1', '2'),
+                                                                                          ('2', 'Adam Gusto', '0', '0', '0'),
+                                                                                          ('3', 'Vladimir Vladys', '4', '3', '8'),
+                                                                                          ('4', 'Dominik IDK', '2', '0', '0');
