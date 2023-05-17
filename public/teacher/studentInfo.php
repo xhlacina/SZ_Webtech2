@@ -4,6 +4,10 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+require_once('../../config/Database.php');
+$database = new Database();
+$db = $database->getConnection();
+
 if ((isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SESSION['loggedin']) && $_SESSION["loggedin"]) && $_SESSION['role'] == 'Ucitel') {
     $email = $_SESSION['email'];
     $name = $_SESSION['name'];
@@ -65,15 +69,33 @@ view('header', ['title' => 'Info o studentovi']);
                                 <th>Meno sady úloh</th>
                                 <th>Číslo úlohy</th>
                                 <th>Stav úlohy</th>
+                                <th>Výsledok</th>
                                 <th>Správnosť výsledku</th>
                                 <th>Počet získaných bodov za príklad</th>
-                                <th>Max. počet bodov za príklad</th>
                             </tr>
                         </thead>
                         <tbody id="table-content">
                             <?php
                             
+                            try{
+                                    
+                                $query = " SELECT name, recieved, submited, points FROM webtech2.students ";
+                                $stmt = $db->query($query); 
+                                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
                                 
+                                foreach($results as $result){
+                                    echo "<tr><td>".$result["name"]."</td><td>"
+                                    .$result["recieved"]."</td><td>"
+                                    .$result["submited"]."</td><td>"
+                                    .$result["points"]."</td><td>"
+                                    .$result["points"]."</td><td>"
+                                    .$result["points"]."</td></tr>";
+                                    
+                                }
+                            
+                            }catch(PDOException $e){
+                                echo $e->getMessage();
+                            }
                             
                             ?>
                             <tr>
