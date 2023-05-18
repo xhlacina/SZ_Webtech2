@@ -18,7 +18,9 @@ view('header', ['title' => 'Student']);
 $database = new Database();
 $db = $database->getConnection();
 
-
+$query = 'SELECT * FROM users';
+$stmt = $db->query($query); 
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 function parseLatexFile($filename) {
     // 1. Load the LaTeX file
@@ -61,7 +63,6 @@ function getRandomTask($filename){
         'equation' => $tasks['equations'][$task_num]
     ];
 }
-
 if(isset($_GET['type'])){
     if(!$_GET['type']==null){
         $query = 'SELECT * FROM assignments
@@ -115,24 +116,12 @@ echo "\n";
             <div class="col-lg-3 col-md-4 col-sm-12">
                 <div class="list-group">
                     <a href="student.php" class="list-group-item list-group-item-action ">Prehľad príkladov</a>
-                    <a href="generate.php" class="list-group-item list-group-item-action active">Vygeneruj príklad</a>
+                    <a href="generate." class="list-group-item list-group-item-action active">Vygeneruj príklad</a>
                 </div>
             </div>
         </div>
         <div class="col-lg-9 col-md-8 col-sm-12">
-            <form action="" method="get">
-                <select name="type" >
-                    <?php 
-                        $query = 'SELECT DISTINCT type FROM assignments';
-                        $stmt = $db->query($query); 
-                        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                        foreach ($results as $result){
-                            echo '<option value="'.$result['type'].'">'.$result['type'].'</option>';
-                        }
-                        ?>
-                </select>
-                <button class="btn btn-success"  >Vygeneruj príklad</button>
-            </form>
+            <!-- Main content goes here -->
         </div>
     </div>
 </div>
