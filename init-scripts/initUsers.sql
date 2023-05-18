@@ -33,8 +33,9 @@ CREATE TABLE `assignments` (
   `number` int NOT NULL,
   `points` int NOT NULL,
   `date` date DEFAULT NULL,
+  `result` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE `students` (
@@ -42,9 +43,9 @@ CREATE TABLE `students` (
   `name` varchar(45) NOT NULL,
   `recieved` int DEFAULT NULL,
   `submited` int DEFAULT NULL,
-  `points` int DEFAULT NULL,
+  `total_points` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `student_assignment`;
 CREATE TABLE `student_assignment` (
@@ -54,12 +55,13 @@ CREATE TABLE `student_assignment` (
   `submited` tinyint DEFAULT NULL,
   `result` text NOT NULL,
   `correct` tinyint DEFAULT NULL,
+  `student_score` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_student_idx` (`student_id`),
   KEY `fk_assignment_idx` (`assignment_id`),
   CONSTRAINT `fk_assignment` FOREIGN KEY (`assignment_id`) REFERENCES `assignments` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_student` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 
