@@ -18,6 +18,12 @@ view('header', ['title' => 'Student']);
 $database = new Database();
 $db = $database->getConnection();
 
+
+$query = 'SELECT * FROM users';
+$stmt = $db->query($query); 
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
 function parseLatexFile($filename) {
     // 1. Load the LaTeX file
     $content = file_get_contents($filename);
