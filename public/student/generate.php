@@ -75,9 +75,16 @@ if(isset($_GET['type'])){
         if(sizeof($assignments)==0){
             echo "Nemožno priradiť ďalšie úlohy.";
         }else{
-
-            
             $query = 'INSERT INTO student_assignment (student_id,assignment_id,submited,result,correct,student_score) VALUES (1,'.$assignments[0]['id'].',0,0,'.$assignments[0]['result'].',0)';
+            $stmt = $db->query($query); 
+
+            $query = 'select * from students where id=1';
+            $stmt = $db->query($query); 
+            $student = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $recieved =$student[0]['recieved']+1;
+            $max=$student[0]['max_points']+$assignments[0]['points'];
+            $query = 'UPDATE students SET recieved='.$recieved.', max_points='.$max.'';
             $stmt = $db->query($query); 
         }
 
@@ -109,7 +116,7 @@ if(isset($_GET['type'])){
             <div class="col-lg-6 col-md-4 col-sm-12">
                 <div class="list-group">
                     <a href="student.php" class="list-group-item list-group-item-action "><?php echo $lang['view_tasks'] ?></a>
-                    <a href="generate." class="list-group-item list-group-item-action active"><?php echo $lang['generate_task'] ?></a>
+                    <a href="#" class="list-group-item list-group-item-action active"><?php echo $lang['generate_task'] ?></a>
                 </div>
             </div>
         </div>
