@@ -32,7 +32,8 @@ $lang = array(
     "show" => "Show",
     "unsubmitted" => "Unsubmitted",
     "submitted" => "Submitted",
-    "submit" => "Submit"
+    "submit" => "Submit",
+    "task" => "Task"
 );
 
 ?>

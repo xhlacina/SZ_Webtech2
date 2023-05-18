@@ -105,7 +105,7 @@ if (isset($_POST['givenFormula'])) {
 					$secondHalf = substr($result, $position + strlen($matches[0]));
 
 					$zadanie = str_replace($matches[0],"",$tasks[$index] );
-					echo "<h3>Úloha " . ($index + 1) ."</h3>";
+					echo "<h3>" . $lang['submit'] . " " . ($index + 1) ."</h3>";
 					echo "<p>" . $firstHalf. "<span id='equation' style='display: in-line;'>\[".$matches[1]. "\]</span> ".$secondHalf."</p>";
 					echo "<img src='../../exams/" . $images[$index] . "' alt='Task Image'>";
 					

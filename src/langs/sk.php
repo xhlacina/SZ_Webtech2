@@ -32,7 +32,8 @@ $lang = array(
     "show" => "Zobraziť",
     "unsubmitted" => "Neodovzdaná",
     "submitted" => "Odovzdaná",
-    "submit" => "Odovzdať"
+    "submit" => "Odovzdať",
+    "task" => "Úloha"
 );
 
 ?>
