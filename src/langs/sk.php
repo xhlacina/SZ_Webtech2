@@ -2,7 +2,7 @@
 $lang = array(
     "title" => "Hlavná Stránka",
     "login" => "Prihlásenie",
-    "email" => "Email :)",
+    "email" => "Email",
     "invalid_email" => "Zadaj správny email.",
     "password" => "Heslo",
     "invalid_password" => "Zadaj správne heslo.",
@@ -31,7 +31,8 @@ $lang = array(
     "result_correctness" => "Správnosť výsledku",
     "show" => "Zobraziť",
     "unsubmitted" => "Neodovzdaná",
-    "submitted" => "Odovzdaná"
+    "submitted" => "Odovzdaná",
+    "submit" => "Odovzdať"
 );
 
 ?>

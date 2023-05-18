@@ -2,7 +2,7 @@
 $lang = array(
     "title" => "Main Page",
     "login" => "Login",
-    "email" => "Email :)",
+    "email" => "Email",
     "invalid_email" => "Enter the correct email.",
     "password" => "Password",
     "invalid_password" => "Enter the correct password.",
@@ -31,7 +31,8 @@ $lang = array(
     "result_correctness" => "Correctness of the result",
     "show" => "Show",
     "unsubmitted" => "Unsubmitted",
-    "submitted" => "Submitted"
+    "submitted" => "Submitted",
+    "submit" => "Submit"
 );
 
 ?>
