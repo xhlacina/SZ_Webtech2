@@ -17,6 +17,7 @@
           crossorigin="anonymous"
           referrerpolicy="no-referrer"/>
     <link rel="shortcut icon" type="image/x-icon" href="/icons/favicon.ico">
+
     <title><?= $title ?? 'Hlavná Stránka' ?></title>
 </head>
 <body>

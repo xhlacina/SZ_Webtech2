@@ -1,6 +1,5 @@
 <?php
 include "./../../src/includes.php";
-include "./../../src/language.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -18,10 +17,6 @@ view('header', ['title' => 'Student']);
 
 $database = new Database();
 $db = $database->getConnection();
-
-$query = 'SELECT * FROM users';
-$stmt = $db->query($query); 
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 function parseLatexFile($filename) {
     // 1. Load the LaTeX file
@@ -48,52 +43,26 @@ function parseLatexFile($filename) {
     ];
 }
 
-function getRandomTask($filename){
-    $countFiles = count($filename);
-    echo $countFiles . "<br>";
-    $random = rand(0,$countFiles);
-    echo $random . "<br>";
-    $file_name = $filename[$random];
-    echo $file_name . "<br>";
-    $tasks = parseLatexFile($file_name);
-    $tasksCount = count($tasks['tasks']);
-    $task_num = rand(0,$tasksCount);
-    return [
-        'task' => $tasks['tasks'][$task_num],
-        'image' => $tasks['images'][$task_num],
-        'equation' => $tasks['equations'][$task_num]
-    ];
-}
+
+
 if(isset($_GET['type'])){
     if(!$_GET['type']==null){
-        $query = 'SELECT * FROM assignments
-        WHERE id NOT IN (SELECT assignment_id FROM student_assignment where student_id =1 && type="'.$_GET['type'].'") ORDER BY RAND() LIMIT 1;';
-        $stmt = $db->query($query); 
-        $assignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        if(sizeof($assignments)==0){
-            echo "Nemožno priradiť ďalšie úlohy.";
-        }else{
-
-            
-            $query = 'INSERT INTO student_assignment (student_id,assignment_id,submited,result,correct,student_score) VALUES (1,'.$assignments[0]['id'].',0,0,'.$assignments[0]['result'].',0)';
-            $stmt = $db->query($query); 
-        }
-
     }
 }
-
+if (isset($_POST['givenFormula'])) {
+    var_dump($_POST['givenFormula']);
+}
 
 ?>
+
+<link rel="stylesheet" href="assignment.css">
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-white">
     <div class="container-fluid d-flex justify-content-between">
         <a class="navbar-brand" href="/public/student/student.php"><img src="https://i.imgur.com/bw4kZxa.png" alt="Logo" title="Logo" style="width: 200px; height: 80px"/></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div>
-            <a href="generate.php?lang=sk">SK</a> | <a href="generate.php?lang=en">EN</a>
-        </div>
         <div style="color: #7676a7" class="navbar-brand ms-auto">
             <?php echo $email?>
             <a style="color: #ff3333" href="/src/logout.php">
@@ -103,23 +72,58 @@ if(isset($_GET['type'])){
     </div>
 </nav>
 <div class="container-fluid">
-    <div class="row ">
-        <div class="col-lg-2 col-md-4 col-sm-12">
-            <div class="col-lg-6 col-md-4 col-sm-12">
-                <div class="list-group">
-                    <a href="student.php" class="list-group-item list-group-item-action "><?php echo $lang['view_tasks'] ?></a>
-                    <a href="generate." class="list-group-item list-group-item-action active"><?php echo $lang['generate_task'] ?></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-9 col-md-8 col-sm-12">
-            <!-- Main content goes here -->
-        </div>
-    </div>
+	<div class="">
+		<div class="row ">
+				<div class="col-lg-3 col-md-4 col-sm-12">
+					<div class="col-lg-3 col-md-4 col-sm-12">
+						<div class="list-group">
+							<a href="student.php" class="list-group-item list-group-item-action active">Prehľad príkladov</a>
+							<a href="generate.php" class="list-group-item list-group-item-action ">Vygeneruj príklad</a>
+						</div>
+					</div>
+				</div>
+			<div id="col-lg-9 col-md-8 col-sm-12">
+				<?php 
+					$filename = '../../exams/'.$_GET['type'];
+					$result = parseLatexFile($filename);
+					
+					$tasks = $result['tasks'];
+					$images = $result['images'];
+					$equations = $result['equations'];
+					
+					$index=$_GET['number']-1;
+					preg_match('/\$(.*?)\$/', $tasks[$index], $matches);
+					$position = strpos($tasks[$index], $matches[0]);
+
+					$result = str_replace($matches[0], "", $tasks[$index]);
+
+					$firstHalf = substr($result, 0, $position);
+					$secondHalf = substr($result, $position + strlen($matches[0]));
+
+					$zadanie = str_replace($matches[0],"",$tasks[$index] );
+					echo "<h3>Úloha " . ($index + 1) ."</h3>";
+					echo "<p>" . $firstHalf. "<span id='equation' style='display: in-line;'>\[".$matches[1]. "\]</span> ".$secondHalf."</p>";
+					echo "<img src='../../exams/" . $images[$index] . "' alt='Task Image'>";
+					
+				?>
+				<form action="#" method="post" id="myForm">
+					<math-field id="formula" name="formula">x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}</math-field>
+					<input type="hidden" name="givenFormula" id="givenFormula" value="">
+					<button class="btn btn-success" type="submit" name="submit" id="submitFormula">Odovzdať</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
+
+
 <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.6.0.js"></script>
 <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<script defer src="//unpkg.com/mathlive"></script>
+<script src="assignment.js"></script>
