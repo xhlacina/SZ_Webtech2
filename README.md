@@ -13,17 +13,14 @@ docker-compose up --build
 Pre úspešné skompilovanie súboru je potrebné mať nainštalovanú a spustenú službu [docker](https://www.docker.com/). Po spustení sa vytvorí docker **kontajner s aplikáciou** a rovnako aj **kontajner s databázou**. Pre tento účel bola použitá databáza mySQL.
 Pri inicializácii databázy sa automaticky vytvoria dvaja používatelia, ktorých dáta sú spomenuté v sekcii [Použitie](#usage)
 
-Druhou možnosťou je použitie webtech2 servera na linke
-https://site104.webte.fei.stuba.sk/SZ
-
 ### Prístupy
 
-|  | Server | Docker |
-|----------|----------|----------|
-| **hostname** | localhost | mysql | 
-| **username** | xhlacina | web | 
-| **password** | HRgY2Y7hHesuNaZ | web | 
-| **dbname** | semestralne | webtech2 | 
+|  | Docker |
+|----------|----------|
+| **hostname** | mysql | 
+| **username** | web | 
+| **password** | web | 
+| **dbname** | webtech2 | 
 
 ## Použitie
 
