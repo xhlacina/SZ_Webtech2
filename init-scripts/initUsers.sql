@@ -44,6 +44,7 @@ CREATE TABLE `students` (
   `recieved` int DEFAULT NULL,
   `submited` int DEFAULT NULL,
   `total_points` int DEFAULT NULL,
+  `max_points` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
