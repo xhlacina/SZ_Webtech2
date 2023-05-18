@@ -59,7 +59,7 @@ if (isset($_POST['submitFile'])) {
     else{
         $date = null;
     }
-    $i = 0;
+    $i = 1;
     foreach ($assignmentsArray as $assignment){
         $query = "  INSERT INTO assignments (type, number, points, date, result)
                         VALUES (
