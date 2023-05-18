@@ -28,7 +28,10 @@ $lang = array(
     "add_deadline" => "Do you want to add a submission deadline?",
     "deadline" => "Deadline date: ",
     "result" => "Result",
-    "result_correctness" => "Correctness of the result"
+    "result_correctness" => "Correctness of the result",
+    "show" => "Show",
+    "unsubmitted" => "Unsubmitted",
+    "submitted" => "Submitted"
 );
 
 ?>

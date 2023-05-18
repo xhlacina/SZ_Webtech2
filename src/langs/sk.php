@@ -28,7 +28,10 @@ $lang = array(
     "add_deadline" => "Chcete pridať deadline odovzdania?",
     "deadline" => "Dátum deadline: ",
     "result" => "Výsledok",
-    "result_correctness" => "Správnosť výsledku"
+    "result_correctness" => "Správnosť výsledku",
+    "show" => "Zobraziť",
+    "unsubmitted" => "Neodovzdaná",
+    "submitted" => "Odovzdaná"
 );
 
 ?>
