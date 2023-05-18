@@ -17,6 +17,7 @@ if ((isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SE
     header('Location: /SZ/index.php');
 }
 view('header', ['title' => 'Ucitel']);
+
 ?>
 
 <!DOCTYPE html>
@@ -64,8 +65,17 @@ view('header', ['title' => 'Ucitel']);
                 <div class="container text-center">
                         <label for="exerciseSelect">Súbor: </label>
                         <select name="exerciseSelect" id="exercises">
-                            <option value="Ex1">file 1</option>
-                            <option value="Ex2">file 2</option>
+                            <?php 
+                                $dir="../../exams";
+                                $files = scandir($dir); 
+                                foreach ($files as $file) {
+                                    // Exclude directories and only process files
+                                    if (is_file($dir . '/' . $file) && pathinfo($file, PATHINFO_EXTENSION) === 'tex') {
+                                        echo '<option value="'.$file.'">'.$file.'</option>';
+                                    }
+                                }
+                        ?>
+
                         </select>
                         <br><br>
                         <label for="points">Počet bodov za príklady v súbore: </label>
