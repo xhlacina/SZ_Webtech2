@@ -32,7 +32,19 @@ $lang = array(
     "show" => "Zobraziť",
     "unsubmitted" => "Neodovzdaná",
     "submitted" => "Odovzdaná",
-    "submit" => "Odovzdať"
+    "submit" => "Odovzdať",
+    "task" => "Úloha",
+    "guide" => "Návod",
+    "student1" => "Ak nemáte v prehľade príkladov žiaden príklad, tak prejdite na Vygeneruj príklad",
+    "student2" => "Zvolte si súbor príkladov a vygeneruje sa Vám príklad.",
+    "student3" => "V prehľade príkladov máte prehľad o všetkých Vašich prikládoch, ktoré Vám boli vygenerované.",
+    "student4" => "Stlačením tlačidla Zobraziť si otvoríte daný príklad.",
+    "student5" => "Príklad vypočítajte a stlačte tlačidlo Odovzdať.",
+    "teacher1" => "V okne Všetci študenti máte prehľad o všetkych študentoch a ich úlohách, kde si viete zoradiť tabuľku podľa Vašich potrieb.",
+    "teacher2" => "Môžete si aj vybrať konkrétneho študenta a klinknutím na jeho meno si viete zobraziť jeho informácie.",
+    "teacher3" => "V oboch oknách si viete stiahnuť CSV súbor tabuliek.",
+    "teacher4" => "V okne Pridať súbor si zvolte súbor úloh pre študentov.",
+    "teacher5" => "Môžete nastaviť počet bodov za príklady a aj dátum pre deadline."
 );
 
 ?>

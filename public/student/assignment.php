@@ -83,10 +83,11 @@ if (isset($_POST['givenFormula'])) {
 						<div class="list-group">
 							<a href="student.php" class="list-group-item list-group-item-action active"><?php echo $lang['view_tasks']; ?></a>
 							<a href="generate.php" class="list-group-item list-group-item-action "><?php echo $lang['generate_task']; ?></a>
+                            <a href="guideStudent.php" class="list-group-item list-group-item-action "><?php echo $lang['guide']; ?></a>
 						</div>
 					</div>
 				</div>
-			<div id="col-lg-9 col-md-8 col-sm-12">
+			<div class="col-lg-9 col-md-8 col-sm-12">
 				<?php 
 					$filename = '../../exams/'.$_GET['type'];
 					$result = parseLatexFile($filename);
@@ -105,16 +106,19 @@ if (isset($_POST['givenFormula'])) {
 					$secondHalf = substr($result, $position + strlen($matches[0]));
 
 					$zadanie = str_replace($matches[0],"",$tasks[$index] );
-					echo "<h3>Úloha " . ($index + 1) ."</h3>";
+					echo "<h3>" . $lang['submit'] . " " . ($index + 1) ."</h3>";
 					echo "<p>" . $firstHalf. "<span id='equation' style='display: in-line;'>\[".$matches[1]. "\]</span> ".$secondHalf."</p>";
 					echo "<img src='../../exams/" . $images[$index] . "' alt='Task Image'>";
 					
 				?>
-				<form action="#" method="post" id="myForm">
-					<math-field id="formula" name="formula">x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}</math-field>
-					<input type="hidden" name="givenFormula" id="givenFormula" value="">
-					<button class="btn btn-success" type="submit" name="submit" id="submitFormula"><?php echo $lang['submit']; ?></button>
-				</form>
+                <div>
+                    <br>
+                    <form action="#" method="post" id="myForm">
+                        <math-field id="formula" name="formula">x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}</math-field>
+                        <input type="hidden" name="givenFormula" id="givenFormula" value="">
+                        <button class="btn btn-success" type="submit" name="submit" id="submitFormula"><?php echo $lang['submit']; ?></button>
+                    </form>
+                </div>
 			</div>
 		</div>
 	</div>

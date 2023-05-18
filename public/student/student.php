@@ -96,6 +96,7 @@ function isSubmited($n, $lang){
                 <div class="list-group">
                 <a href="student.php" class="list-group-item list-group-item-action active "><?php echo $lang['view_tasks']; ?></a>
                     <a href="generate.php" class="list-group-item list-group-item-action "><?php echo $lang['generate_task']; ?></a>
+                    <a href="guideStudent.php" class="list-group-item list-group-item-action "><?php echo $lang['guide']; ?></a>
                 </div>
             </div>
         </div>

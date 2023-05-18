@@ -68,6 +68,7 @@ view('header', ['title' => 'Info o studentovi']);
 
                         ?>
                         <a href="addFile.php" class="list-group-item list-group-item-action"><?php echo $lang['add_file'] ?></a>
+                        <a href="guideTeacher.php" class="list-group-item list-group-item-action "><?php echo $lang['guide']; ?></a>
                     </div>
                 </div>
             </div>
@@ -120,19 +121,26 @@ view('header', ['title' => 'Info o studentovi']);
                                 
 
                                 foreach($results as $result){
+                                    
+                                    if ($result["submited"] == 1){
+                                        $submitted = "odovzdané";
+                                    }
+                                    else{
+                                        $submitted = "neodovzdané";
+                                    }
 
                                     if ($result["result"] == $result["correct"]){
-                                        $correct = "spravne";
+                                        $correct = "správne";
                                         $points = $result["points"];
                                     }
                                     else{
-                                        $correct = "nespravne";
+                                        $correct = "nesprávne";
                                         $points = 0;
                                     }
 
                                     echo "<tr><td>".$result["type"]."</td><td>"
                                     .$result["assignment_id"]."</td><td>"
-                                    .$result["submited"]."</td><td>"
+                                    .$submitted."</td><td>"
                                     .$result["result"]."</td><td>"
                                     .$correct."</td><td>"
                                     .$points."</td></tr>";

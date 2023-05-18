@@ -3,3 +3,8 @@ mjx-container[jax="SVG"][display="true"] {
     text-align: center;
     margin: 1em 0;
 }
+
+#formula{
+    width: 400px;
+    font-size: 32px;
+}
