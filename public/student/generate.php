@@ -63,6 +63,37 @@ function getRandomTask($filename){
         'equation' => $tasks['equations'][$task_num]
     ];
 }
+if(isset($_GET['type'])){
+    if(!$_GET['type']==null){
+        $query = 'SELECT * FROM assignments
+        WHERE id NOT IN (SELECT assignment_id FROM student_assignment where student_id =1 && type="'.$_GET['type'].'") ORDER BY RAND() LIMIT 1;';
+        $stmt = $db->query($query);
+        $assignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if(sizeof($assignments)==0){
+            echo "Nemožno priradiť ďalšie úlohy.";
+        }else{
+
+
+            $query = 'INSERT INTO student_assignment (student_id,assignment_id,submited,result,correct,student_score) VALUES (1,'.$assignments[0]['id'].',0,0,'.$assignments[0]['result'].',0)';
+            $stmt = $db->query($query);
+        }
+
+    }
+}
+
+$filename = '../../exams/blokovka01pr.tex';
+$result = parseLatexFile($filename);
+
+$tasks = $result['tasks'];
+$images = $result['images'];
+$equations = $result['equations'];
+
+// Do something with the extracted data
+echo "Task 1: " . $tasks[0] . "\n";
+echo "Image 1: " . $images[0] . "\n";
+echo "Equation 1: " . $equations[0] . "\n";
+echo "\n";
 
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-white">
