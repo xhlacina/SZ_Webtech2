@@ -23,8 +23,8 @@ function parseLatexFile($filename) {
     $content = file_get_contents($filename);
 
     // 2. Define regular expressions
-    $taskRegex = '/\\begin{task}(.?)\\includegraphics{(.?)}.?\\end{task}/s';
-    $solutionRegex = '/\\begin{equation*?}(.?)\\end{equation*?}/s';
+    $taskRegex = '/\\\\begin\{task\}((?:(?!\\\\end\{task\}).)*)\\\\includegraphics\{([^}]*)\}/s';
+    $solutionRegex = '/\\\\begin\{equation\*\}((?:(?!\\\\end\{equation\*\}).)*)\\\\end\{equation\*\}/s';
 
     // 3. Get all matches
     preg_match_all($taskRegex, $content, $taskMatches);
@@ -32,13 +32,13 @@ function parseLatexFile($filename) {
 
     // Clean up the matches
     $tasks = array_map('trim', $taskMatches[1]);
-    $imgs = array_map('trim', $taskMatches[2]);
+    $images = array_map('trim', $taskMatches[2]);
     $equations = array_map('trim', $solutionMatches[1]);
 
     // 4. Return the results
     return [
         'tasks' => $tasks,
-        'images' => $imgs,
+        'images' => $images,
         'equations' => $equations
     ];
 }
@@ -46,6 +46,11 @@ function parseLatexFile($filename) {
 if (isset($_POST['submitFile'])) {
 
     $file = $_POST['exerciseSelect'];
+
+    $filePath = "../../exams/".$file;
+    
+    $assignmentsArray = parseLatexFile($filePath);
+
     $points = $_POST['points'];
     if (isset($_POST['ifDeadline'])){
         $date = $_POST['deadline'];
@@ -53,28 +58,34 @@ if (isset($_POST['submitFile'])) {
     else{
         $date = null;
     }
-
-    $query = "  INSERT INTO assignments (type, number, points, date, result)
+    $i = 0;
+    foreach ($assignmentsArray as $assignment){
+        $query = "  INSERT INTO assignments (type, number, points, date, result)
                         VALUES (
                             :type, 
-                            1, 
+                            :number, 
                             :points,
                             :date,
-                            1)";
+                            :result)";
 
-    // Bind parametrov do SQL
-    $stmt = $db->prepare($query);
+        // Bind parametrov do SQL
+        $stmt = $db->prepare($query);
 
-    $stmt->bindParam(":type", $file, PDO::PARAM_STR);
-    //$stmt->bindParam(":number", 1, PDO::PARAM_STR);
-    $stmt->bindParam(":points", $points, PDO::PARAM_STR);
-    $stmt->bindParam(":date", $date, PDO::PARAM_STR);
-    //$stmt->bindParam(":result", 12, PDO::PARAM_STR);
+        $stmt->bindParam(":type", $file, PDO::PARAM_STR);
+        $stmt->bindParam(":number", $i, PDO::PARAM_STR);
+        $stmt->bindParam(":points", $points, PDO::PARAM_STR);
+        $stmt->bindParam(":date", $date, PDO::PARAM_STR);
+        $stmt->bindParam(":result", $assignmentsArray["equations"][$i], PDO::PARAM_STR);
 
-    if ($stmt->execute()) {
-    } else {
-        echo "Ups. Nieco sa pokazilo";
+        if ($stmt->execute()) {
+        } else {
+            echo "Ups. Nieco sa pokazilo";
+        }
+
+        $i++;
     }
+
+    
 
 }
 
