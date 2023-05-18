@@ -63,10 +63,10 @@ function getRandomTask($filename){
 
 function isSubmited($n){
     if($n ==0){
-        return $lang["unsubmitted"];
+        return echo $lang["unsubmitted"];
     }
     if($n ==1){
-        return $lang["submitted"];
+        return echo $lang["submitted"];
     }
 }
 ?>
@@ -94,8 +94,8 @@ function isSubmited($n){
         <div class="col-lg-2 col-md-4 col-sm-12">
             <div class="col-lg-6 col-md-4 col-sm-12">
                 <div class="list-group">
-                <a href="student.php" class="list-group-item list-group-item-action active "><?php echo $lang['view_tasks'] ?></a>
-                    <a href="generate.php" class="list-group-item list-group-item-action "><?php echo $lang['generate_task'] ?></a>
+                <a href="student.php" class="list-group-item list-group-item-action active "><?php echo $lang['view_tasks']; ?></a>
+                    <a href="generate.php" class="list-group-item list-group-item-action "><?php echo $lang['generate_task']; ?></a>
                 </div>
             </div>
         </div>
@@ -105,11 +105,11 @@ function isSubmited($n){
                     <table id="allAssignments" class="table table-striped">
                     <thead>
                             <tr>
-                                <th><?php echo $lang['task_set_name'] ?></th>
-                                <th><?php echo $lang['task_number'] ?></th>
-                                <th><?php echo $lang['task_state'] ?></th>
-                                <th><?php echo $lang['received_points'] ?></th>
-                                <th><?php echo $lang['points_for_task'] ?></th>
+                                <th><?php echo $lang['task_set_name']; ?></th>
+                                <th><?php echo $lang['task_number']; ?></th>
+                                <th><?php echo $lang['task_state']; ?></th>
+                                <th><?php echo $lang['received_points']; ?></th>
+                                <th><?php echo $lang['points_for_task']; ?></th>
                             </tr>
                         </thead>
                         <tbody id="table-content">
