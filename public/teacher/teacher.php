@@ -80,7 +80,7 @@ view('header', ['title' => 'Učiteľ']);
                                     
                                     
                                 
-                                    $query = " SELECT s.id, s.name, s.recieved, s.submited, s.points as totalPoints, 
+                                    $query = " SELECT s.id, s.name, s.recieved, s.submited, s.total_points, 
                                                     sa.result, sa.correct, a.points
                                                 FROM webtech2.students s
                                                 INNER JOIN webtech2.student_assignment sa
