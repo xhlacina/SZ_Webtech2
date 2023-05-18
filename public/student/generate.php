@@ -25,10 +25,8 @@ function parseLatexFile($filename) {
     $content = file_get_contents($filename);
 
     // 2. Define regular expressions
-    //    $taskRegex = '/\\begin{task}(.?)\\includegraphics{(.?)}.?\\end{task}/s';
-    $taskRegex = '/\\begin{task}(.?)\\\\includegraphics{(.?)}.?\\end{task}/s';
-    $solutionRegex = '/\\begin{equation*?}(.?)\\end{equation*?}/s';
-
+    $taskRegex = '/\\\\begin\{task\}((?:(?!\\\\end\{task\}).)*)\\\\includegraphics\{([^}]*)\}/s';
+    $solutionRegex = '/\\\\begin\{equation\*\}((?:(?!\\\\end\{equation\*\}).)*)\\\\end\{equation\*\}/s';
 
     // 3. Get all matches
     preg_match_all($taskRegex, $content, $taskMatches);
@@ -36,13 +34,13 @@ function parseLatexFile($filename) {
 
     // Clean up the matches
     $tasks = array_map('trim', $taskMatches[1]);
-    $imgs = array_map('trim', $taskMatches[2]);
+    $images = array_map('trim', $taskMatches[2]);
     $equations = array_map('trim', $solutionMatches[1]);
 
     // 4. Return the results
     return [
         'tasks' => $tasks,
-        'images' => $imgs,
+        'images' => $images,
         'equations' => $equations
     ];
 }
@@ -64,37 +62,38 @@ function getRandomTask($filename){
     ];
 }
 
-function isAssigned($type,$id,$db){
-    $query = 'SELECT sa.id, sa.student_id, sa.assignment_id,sa.submited,sa.result ,sa.student_score,a.number, a.type, a.points
-    FROM student_assignment sa
-    JOIN assignments a ON sa.assignment_id = a.id 
-    where a.type="'.$type.'" and sa.assignment_id='.$id.';';
-    $stmt = $db->query($query); 
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if(!sizeof($rows)==0){
-        return false;
-    }else{
-        return true;
-    }
-}
-
 if(isset($_GET['type'])){
     if(!$_GET['type']==null){
-        $query = 'SELECT * FROM assignments WHERE type = "'.$_GET['type'].'" ORDER BY RAND() LIMIT 1;';
+        $query = 'SELECT * FROM assignments
+        WHERE id NOT IN (SELECT assignment_id FROM student_assignment where student_id =1 && type="'.$_GET['type'].'") ORDER BY RAND() LIMIT 1;';
         $stmt = $db->query($query); 
         $assignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+        if(sizeof($assignments)==0){
+            echo "Nemožno priradiť ďalšie úlohy.";
+        }else{
 
-        try{
+            
             $query = 'INSERT INTO student_assignment (student_id,assignment_id,submited,result,correct,student_score) VALUES (1,'.$assignments[0]['id'].',0,0,'.$assignments[0]['result'].',0)';
             $stmt = $db->query($query); 
-            $stmt->execute(); 
-        }catch(PDOException $e){
-            echo $e;
         }
+
     }
 }
-var_dump(parseLatexFile("../../exams/blokovka01pr.tex"))
+
+$filename = '../../exams/blokovka01pr.tex';
+$result = parseLatexFile($filename);
+
+$tasks = $result['tasks'];
+$images = $result['images'];
+$equations = $result['equations'];
+
+// Do something with the extracted data
+echo "Task 1: " . $tasks[0] . "\n";
+echo "Image 1: " . $images[0] . "\n";
+echo "Equation 1: " . $equations[0] . "\n";
+echo "\n";
+
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-white">
     <div class="container-fluid d-flex justify-content-between">

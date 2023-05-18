@@ -68,7 +68,6 @@ function isSubmited($n){
         return "Odovzdaná";
     }
 }
-var_dump(parseLatexFile('../../exams/odozva02pr.tex'));
 ?>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
@@ -111,7 +110,9 @@ var_dump(parseLatexFile('../../exams/odozva02pr.tex'));
                         </thead>
                         <tbody id="table-content">
                         <?php 
-                            $stmt = $db->query( 'SELECT * FROM assignments'); 
+                            $stmt = $db->query( 'SELECT sa.id, sa.student_id, sa.assignment_id, sa.submited, sa.result, sa.student_score, a.number, a.type, a.points
+                            FROM student_assignment sa
+                            JOIN assignments a ON sa.assignment_id = a.id where student_id=1;'); 
                             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if(sizeof($results)==0){
                                 echo "<tr><td colspan='5' class='text-center'>Nemáte žiadne príklady</td></tr>";
