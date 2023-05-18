@@ -17,6 +17,68 @@ if ((isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SE
     header('Location: /SZ/index.php');
 }
 view('header', ['title' => 'Ucitel']);
+
+function parseLatexFile($filename) {
+    // 1. Load the LaTeX file
+    $content = file_get_contents($filename);
+
+    // 2. Define regular expressions
+    $taskRegex = '/\\begin{task}(.?)\\includegraphics{(.?)}.?\\end{task}/s';
+    $solutionRegex = '/\\begin{equation*?}(.?)\\end{equation*?}/s';
+
+    // 3. Get all matches
+    preg_match_all($taskRegex, $content, $taskMatches);
+    preg_match_all($solutionRegex, $content, $solutionMatches);
+
+    // Clean up the matches
+    $tasks = array_map('trim', $taskMatches[1]);
+    $imgs = array_map('trim', $taskMatches[2]);
+    $equations = array_map('trim', $solutionMatches[1]);
+
+    // 4. Return the results
+    return [
+        'tasks' => $tasks,
+        'images' => $imgs,
+        'equations' => $equations
+    ];
+}
+
+if (isset($_POST['submitFile'])) {
+
+    $file = $_POST['exerciseSelect'];
+    $points = $_POST['points'];
+    if (isset($_POST['ifDeadline'])){
+        $date = $_POST['deadline'];
+    }
+    else{
+        $date = null;
+    }
+
+    $query = "  INSERT INTO assignments (type, number, points, date, result)
+                        VALUES (
+                            :type, 
+                            1, 
+                            :points,
+                            :date,
+                            1)";
+
+    // Bind parametrov do SQL
+    $stmt = $db->prepare($query);
+
+    $stmt->bindParam(":type", $file, PDO::PARAM_STR);
+    //$stmt->bindParam(":number", 1, PDO::PARAM_STR);
+    $stmt->bindParam(":points", $points, PDO::PARAM_STR);
+    $stmt->bindParam(":date", $date, PDO::PARAM_STR);
+    //$stmt->bindParam(":result", 12, PDO::PARAM_STR);
+
+    if ($stmt->execute()) {
+    } else {
+        echo "Ups. Nieco sa pokazilo";
+    }
+
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +124,8 @@ view('header', ['title' => 'Ucitel']);
                 <!-- Main content goes here -->
 
                 <div class="container text-center">
-                        <label for="exerciseSelect">Súbor: </label>
+                    <form method="post">
+                    <label for="exerciseSelect">Súbor: </label>
                         <select name="exerciseSelect" id="exercises">
                         <?php 
                                 $dir="../../exams";
@@ -77,7 +140,7 @@ view('header', ['title' => 'Ucitel']);
                         </select>
                         <br><br>
                         <label for="points">Počet bodov za príklady v súbore: </label>
-                        <input type="number" name="points" id="points">
+                        <input type="number" name="points" id="points" value="1">
                         <br><br>
                         <label for="ifDeadline">Chcete pridat deadline odovzdania?</label>
                         <input type="checkbox" name="ifDeadline" id="deadlineCheckbox" onclick="checkboxFunction()">
@@ -87,7 +150,7 @@ view('header', ['title' => 'Ucitel']);
                             <input type="date" name="deadline" id="deadlineDate">
                             <br><br>
                         </div>
-                        <button type="submit">Pridať súbor</button>
+                        <button type="submit" name="submitFile">Pridať súbor</button>
                     </form>
                 </div>
 
