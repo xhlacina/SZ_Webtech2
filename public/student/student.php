@@ -1,5 +1,6 @@
 <?php
 include "./../../src/includes.php";
+include "./../../src/language.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -77,6 +78,9 @@ function isSubmited($n){
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div>
+            <a href="student.php?lang=sk">SK</a> | <a href="student.php?lang=en">EN</a>
+        </div>
         <div style="color: #7676a7" class="navbar-brand ms-auto">
             <?php echo $email?>
             <a style="color: #ff3333" href="/src/logout.php">
@@ -90,8 +94,8 @@ function isSubmited($n){
         <div class="col-lg-2 col-md-4 col-sm-12">
             <div class="col-lg-6 col-md-4 col-sm-12">
                 <div class="list-group">
-                <a href="student.php" class="list-group-item list-group-item-action active ">Prehľad príkladov</a>
-                    <a href="generate.php" class="list-group-item list-group-item-action ">Vygeneruj príklad</a>
+                <a href="student.php" class="list-group-item list-group-item-action active "><?php echo $lang['view_tasks'] ?></a>
+                    <a href="generate.php" class="list-group-item list-group-item-action "><?php echo $lang['generate_task'] ?></a>
                 </div>
             </div>
         </div>
@@ -101,11 +105,11 @@ function isSubmited($n){
                     <table id="allAssignments" class="table table-striped">
                     <thead>
                             <tr>
-                                <th>Meno Sady Úloh</th>
-                                <th>Číslo úlohy</th>
-                                <th>Stav úlohy</th>
-                                <th>Počet získaných bodov za príklad</th>
-                                <th>Max. počet bodov za príklad</th>
+                                <th><?php echo $lang['task_set_name'] ?></th>
+                                <th><?php echo $lang['task_number'] ?></th>
+                                <th><?php echo $lang['task_state'] ?></th>
+                                <th><?php echo $lang['received_points'] ?></th>
+                                <th><?php echo $lang['points_for_task'] ?></th>
                             </tr>
                         </thead>
                         <tbody id="table-content">
