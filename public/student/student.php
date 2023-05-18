@@ -126,7 +126,7 @@ function isSubmited($n, $lang){
                                     echo "<tr><td>" . $result["type"]  
                                     . "</td><td>".$result["number"] 
                                     . "</td><td>".isSubmited($result["submited"], $lang)
-                                    . "</td><td>".$result["result"] 
+                                    . "</td><td>".$result["student_score"] 
                                     . "</td><td>".$result["points"]
                                     ."</td><td>
                                             <button type='button' class='btn btn-warning' onclick='edit(this)'>" . $lang['show'] . "</button>
