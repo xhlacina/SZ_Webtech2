@@ -114,7 +114,20 @@ if(isset($_GET['type'])){
             </div>
         </div>
         <div class="col-lg-9 col-md-8 col-sm-12">
-            <!-- Main content goes here -->
+        <form action="" method="get">
+                <select name="type" >
+                    <?php 
+                        $query = 'SELECT DISTINCT type FROM assignments';
+                        $stmt = $db->query($query); 
+                        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        foreach ($results as $result){
+                            echo '<option value="'.$result['type'].'">'.$result['type'].'</option>';
+                        }
+                        
+                        ?>
+                </select>
+                <button class="btn btn-success"  >Vygeneruj príklad</button>
+            </form>
         </div>
     </div>
 </div>
