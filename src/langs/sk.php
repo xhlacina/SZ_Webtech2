@@ -33,7 +33,14 @@ $lang = array(
     "unsubmitted" => "Neodovzdaná",
     "submitted" => "Odovzdaná",
     "submit" => "Odovzdať",
-    "task" => "Úloha"
+    "task" => "Úloha",
+    "guide" => "Návod",
+    "student1" => "Ak nemáte v prehľade príkladov žiaden príklad, tak prejdite na Vygeneruj príklad",
+    "student2" => "Zvolte si súbor príkladov a vygeneruje sa Vám príklad.",
+    "student3" => "V prehľade príkladov máte prehľad o všetkých Vašich prikládoch, ktoré Vám boli vygenerované.",
+    "student4" => "Stlačením tlačidla Zobraziť si otvoríte daný príklad.",
+    "student5" => "Príklad vypočítajte a stlačte tlačidlo Odovzdať.",
+    
 );
 
 ?>
