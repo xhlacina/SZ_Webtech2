@@ -54,7 +54,7 @@ CREATE TABLE `student_assignment` (
   `assignment_id` int NOT NULL,
   `submited` tinyint DEFAULT NULL,
   `result` text NOT NULL,
-  `correct` tinyint DEFAULT NULL,
+  `correct` text,
   `student_score` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_student_idx` (`student_id`),
