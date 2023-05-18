@@ -1,5 +1,6 @@
 <?php
 include "./../../src/includes.php";
+include "./../../src/language.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -63,6 +64,9 @@ if (isset($_POST['givenFormula'])) {
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div>
+            <a href="assignment.php?lang=sk">SK</a> | <a href="assignment.php?lang=en">EN</a>
+        </div>
         <div style="color: #7676a7" class="navbar-brand ms-auto">
             <?php echo $email?>
             <a style="color: #ff3333" href="/src/logout.php">
@@ -77,8 +81,8 @@ if (isset($_POST['givenFormula'])) {
 				<div class="col-lg-3 col-md-4 col-sm-12">
 					<div class="col-lg-3 col-md-4 col-sm-12">
 						<div class="list-group">
-							<a href="student.php" class="list-group-item list-group-item-action active">Prehľad príkladov</a>
-							<a href="generate.php" class="list-group-item list-group-item-action ">Vygeneruj príklad</a>
+							<a href="student.php" class="list-group-item list-group-item-action active"><?php echo $lang['view_tasks']; ?></a>
+							<a href="generate.php" class="list-group-item list-group-item-action "><?php echo $lang['generate_task']; ?></a>
 						</div>
 					</div>
 				</div>
@@ -109,7 +113,7 @@ if (isset($_POST['givenFormula'])) {
 				<form action="#" method="post" id="myForm">
 					<math-field id="formula" name="formula">x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}</math-field>
 					<input type="hidden" name="givenFormula" id="givenFormula" value="">
-					<button class="btn btn-success" type="submit" name="submit" id="submitFormula">Odovzdať</button>
+					<button class="btn btn-success" type="submit" name="submit" id="submitFormula"><?php echo $lang['submit']; ?></button>
 				</form>
 			</div>
 		</div>
