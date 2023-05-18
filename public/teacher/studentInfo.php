@@ -53,7 +53,16 @@ view('header', ['title' => 'Info o studentovi']);
                 <div class="col-lg-6 col-md-4 col-sm-12">
                     <div class="list-group">
                         <a href="teacher.php" class="list-group-item list-group-item-action ">Všetci študenti</a>
-                        <a href="#" class="list-group-item list-group-item-action active">Meno Študenta</a>
+
+                        <?php
+
+                            $query = " SELECT id, name FROM webtech2.students WHERE id = ".$_GET['id']."";
+                            $stmt = $db->query($query); 
+                            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
+
+                            echo "<a href='#' class='list-group-item list-group-item-action active'>".$results[0]['name']."</a>"
+
+                        ?>
                         <a href="addFile.php" class="list-group-item list-group-item-action">Pridať súbor</a>
                     </div>
                 </div>
@@ -63,7 +72,23 @@ view('header', ['title' => 'Info o studentovi']);
 
                 <div class="container">
                     <table id="oneStudentTable" class="table table-striped">
-                        <h1>Meno študenta</h1>
+                        <?php
+                        try{
+                            
+                            
+                            $query = " SELECT id, name FROM webtech2.students WHERE id = ".$_GET['id']."";
+                            $stmt = $db->query($query); 
+                            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
+
+                            
+                            echo "<h1>".$results[0]['name']."</h1>";
+                        
+                        }catch(PDOException $e){
+                            echo $e->getMessage();
+                        }
+                           
+                        ?>
+                        
                         <thead>
                             <tr>
                                 <th>Meno sady úloh</th>
@@ -79,17 +104,34 @@ view('header', ['title' => 'Info o studentovi']);
                             
                             try{
                                     
-                                $query = " SELECT name, recieved, submited, points FROM webtech2.students ";
+                                $query = " SELECT a.type, sa.assignment_id, sa.submited, sa.result, sa.correct, a.points
+                                            FROM webtech2.student_assignment sa
+                                            INNER JOIN webtech2.students s
+                                            on sa.student_id = s.id
+                                            INNER JOIN webtech2.assignments a
+                                            on sa.assignment_id = a.id 
+                                            WHERE sa.student_id = ".$_GET['id']." ";
                                 $stmt = $db->query($query); 
                                 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
                                 
+
                                 foreach($results as $result){
-                                    echo "<tr><td>".$result["name"]."</td><td>"
-                                    .$result["recieved"]."</td><td>"
+
+                                    if ($result["result"] == $result["correct"]){
+                                        $correct = "spravne";
+                                        $points = $result["points"];
+                                    }
+                                    else{
+                                        $correct = "nespravne";
+                                        $points = 0;
+                                    }
+
+                                    echo "<tr><td>".$result["type"]."</td><td>"
+                                    .$result["assignment_id"]."</td><td>"
                                     .$result["submited"]."</td><td>"
-                                    .$result["points"]."</td><td>"
-                                    .$result["points"]."</td><td>"
-                                    .$result["points"]."</td></tr>";
+                                    .$result["result"]."</td><td>"
+                                    .$correct."</td><td>"
+                                    .$points."</td></tr>";
                                     
                                 }
                             
@@ -98,30 +140,7 @@ view('header', ['title' => 'Info o studentovi']);
                             }
                             
                             ?>
-                            <tr>
-                                <td>Geoniometria</td>
-                                <td>1</td>
-                                <td>odovzdaný</td>
-                                <td>nespravny - cerveny bg</td>
-                                <td>0</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>Pravdepodobnost</td>
-                                <td>4</td>
-                                <td>neodovzdany</td>
-                                <td>neodovzdany</td>
-                                <td>0</td>
-                                <td>3</td>
-                            </tr>
-                            <tr>
-                                <td>Pravdepodobnost</td>
-                                <td>2</td>
-                                <td>odovzdaný</td>
-                                <td>spravny - zeleny bg</td>
-                                <td>3</td>
-                                <td>3</td>
-                            </tr>
+                            
                         </tbody>
                     </table>
                 </div>

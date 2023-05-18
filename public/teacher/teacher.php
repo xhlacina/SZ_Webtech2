@@ -72,21 +72,39 @@ view('header', ['title' => 'Učiteľ']);
                         </thead>
                         <tbody id="table-content">
                             <?php
-                            
+                                
                                 try{
                                     
                                     
                                 
-                                    $query = " SELECT name, recieved, submited, points FROM webtech2.students ";
+                                    $query = " SELECT s.id, s.name, s.recieved, s.submited, s.points as totalPoints, 
+                                                    sa.result, sa.correct, a.points
+                                                FROM webtech2.students s
+                                                INNER JOIN webtech2.student_assignment sa
+                                                ON sa.student_id = s.id
+                                                INNER JOIN webtech2.assignments a
+                                                ON a.id = sa.assignment_id
+                                                ORDER BY s.name";
                                     $stmt = $db->query($query); 
                                     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
                                     
+
+
                                     foreach($results as $result){
-                                        echo "<tr><td>".$result["name"]."</td><td>"
+                                        $pointsGot = 0;
+                                        foreach($result as $student){
+                                            var_dump($result);
+                                            if (is_int($student["result"]) && $student["result"] == $student["correct"]){
+                                                $pointsGot = $pointsGot + $student["points"];
+                                            }
+                                        }
+
+                                        echo 
+                                        "<tr><td>". '<a href = "studentInfo.php?id='.$result["id"].'">' .$result["name"].'</a> '."</td><td>"
                                         .$result["recieved"]."</td><td>"
                                         .$result["submited"]."</td><td>"
-                                        .$result["points"]."</td><td>"
-                                        .$result["points"]."</td></tr>";
+                                        .$pointsGot."</td><td>"
+                                        .$result["totalPoints"]."</td></tr>";
                                         
                                     }
                                 
