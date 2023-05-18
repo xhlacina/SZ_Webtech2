@@ -63,10 +63,10 @@ function getRandomTask($filename){
 
 function isSubmited($n){
     if($n ==0){
-        return "Neodovzdaná";
+        return $lang["unsubmitted"];
     }
     if($n ==1){
-        return "Odovzdaná";
+        return $lang["submitted"];
     }
 }
 ?>
@@ -128,7 +128,7 @@ function isSubmited($n){
                                     . "</td><td>".$result["result"] 
                                     . "</td><td>".$result["points"]
                                     ."</td><td>
-                                            <button type='button' class='btn btn-warning' onclick='edit(this)'>Zobraziť</button>
+                                            <button type='button' class='btn btn-warning' onclick='edit(this)'>" . $lang['show'] . "</button>
                                     </td></tr>";
                                 }
                             }
