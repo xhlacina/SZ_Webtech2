@@ -82,6 +82,36 @@ if (isset($_POST['givenFormula'])) {
 						</div>
 					</div>
 				</div>
+			<div id="col-lg-9 col-md-8 col-sm-12">
+				<?php 
+					$filename = '../../exams/'.$_GET['type'];
+					$result = parseLatexFile($filename);
+					
+					$tasks = $result['tasks'];
+					$images = $result['images'];
+					$equations = $result['equations'];
+					
+					$index=$_GET['number']-1;
+					preg_match('/\$(.*?)\$/', $tasks[$index], $matches);
+					$position = strpos($tasks[$index], $matches[0]);
+
+					$result = str_replace($matches[0], "", $tasks[$index]);
+
+					$firstHalf = substr($result, 0, $position);
+					$secondHalf = substr($result, $position + strlen($matches[0]));
+
+					$zadanie = str_replace($matches[0],"",$tasks[$index] );
+					echo "<h3>Úloha " . ($index + 1) ."</h3>";
+					echo "<p>" . $firstHalf. "<span id='equation' style='display: in-line;'>\[".$matches[1]. "\]</span> ".$secondHalf."</p>";
+					echo "<img src='../../exams/" . $images[$index] . "' alt='Task Image'>";
+					
+				?>
+				<form action="#" method="post" id="myForm">
+					<math-field id="formula" name="formula">x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}</math-field>
+					<input type="hidden" name="givenFormula" id="givenFormula" value="">
+					<button class="btn btn-success" type="submit" name="submit" id="submitFormula">Odovzdať</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
