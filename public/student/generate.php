@@ -120,6 +120,7 @@ if(isset($_GET['type'])){
                         foreach ($results as $result){
                             echo '<option value="'.$result['type'].'">'.$result['type'].'</option>';
                         }
+                        
                         ?>
                 </select>
                 <button class="btn btn-success"  >Vygeneruj príklad</button>
