@@ -33,7 +33,13 @@ $lang = array(
     "unsubmitted" => "Unsubmitted",
     "submitted" => "Submitted",
     "submit" => "Submit",
-    "task" => "Task"
+    "task" => "Task",
+    "guide" => "Guide",
+    "student1" => "If there are not any tasks in Overview of tasks tab, please go to Generate task tab",
+    "student2" => "Choose a file of tasks and one task will be generated for you.",
+    "student3" => "In Overview of tasks you have overview about all of your tasks, that were genereted for you.",
+    "student4" => "By pressing button Show you can open the task.",
+    "student5" => "Solve given task and press button Submit.",
 );
 
 ?>
