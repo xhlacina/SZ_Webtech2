@@ -66,11 +66,12 @@ function getRandomTask($filename){
 
 if(isset($_GET['type'])){
     if(!$_GET['type']==null){
-        $query = 'SELECT * FROM assignments
-        WHERE id NOT IN (SELECT assignment_id FROM student_assignment where student_id =1 && type="'.$_GET['type'].'") ORDER BY RAND() LIMIT 1;';
+        $currentDate = date('Y-m-d');
+        $query = 'SELECT *
+        FROM assignments s
+        WHERE s.id NOT IN (SELECT assignment_id FROM student_assignment WHERE student_id = 1) and s.type="'.$_GET['type'].'" and (s.date>"'.$currentDate.'" or s.date is null) ORDER BY RAND() LIMIT 1;';
         $stmt = $db->query($query); 
         $assignments = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         if(sizeof($assignments)==0){
             echo "Nemožno priradiť ďalšie úlohy.";
         }else{
