@@ -51,11 +51,12 @@ if(isset($_GET['type'])){
     }
 }
 if (isset($_POST['givenFormula'])) {
-    var_dump($_POST['givenFormula']);
+    
+   
 
     // DONE submited++ in student_assignment
     try{
-        $query = " UPDATE webtech2.student_assignment SET submited = 1, result =".$_POST['givenFormula'];
+        $query = " UPDATE webtech2.student_assignment SET submited = 1";
         $stmt = $db->query($query); 
 
     }catch(PDOException $e){
@@ -91,7 +92,7 @@ if (isset($_POST['givenFormula'])) {
     // Custom data to send
     $data = array(
         'expr1' => $_POST['givenFormula'],
-        'expr2' => $results["correct"]
+        'expr2' => $results[0]['correct']
     );
 
     // Convert the data to JSON
