@@ -86,7 +86,7 @@ if (isset($_POST['givenFormula'])) {
 						</div>
 					</div>
 				</div>
-			<div id="col-lg-9 col-md-8 col-sm-12">
+			<div class="col-lg-9 col-md-8 col-sm-12">
 				<?php 
 					$filename = '../../exams/'.$_GET['type'];
 					$result = parseLatexFile($filename);
@@ -110,11 +110,14 @@ if (isset($_POST['givenFormula'])) {
 					echo "<img src='../../exams/" . $images[$index] . "' alt='Task Image'>";
 					
 				?>
-				<form action="#" method="post" id="myForm">
-					<math-field id="formula" name="formula">x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}</math-field>
-					<input type="hidden" name="givenFormula" id="givenFormula" value="">
-					<button class="btn btn-success" type="submit" name="submit" id="submitFormula"><?php echo $lang['submit']; ?></button>
-				</form>
+                <div>
+                    <br>
+                    <form action="#" method="post" id="myForm">
+                        <math-field id="formula" name="formula">x=\frac{-b\pm \sqrt{b^2-4ac}}{2a}</math-field>
+                        <input type="hidden" name="givenFormula" id="givenFormula" value="">
+                        <button class="btn btn-success" type="submit" name="submit" id="submitFormula"><?php echo $lang['submit']; ?></button>
+                    </form>
+                </div>
 			</div>
 		</div>
 	</div>
