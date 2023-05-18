@@ -77,7 +77,7 @@ if(isset($_GET['type'])){
         }else{
 
             
-            $query = 'INSERT INTO student_assignment (student_id,assignment_id,submited,result,correct,student_score) VALUES (1,'.$assignments[0]['id'].',0,0,'.$assignments[0]['result'].',0)';
+            $query = 'INSERT INTO student_assignment (student_id,assignment_id,submited,result,correct,student_score) VALUES (1,'.$assignments[0]['id'].',0,0,"'.$assignments[0]['result'].'",0)';
             $stmt = $db->query($query); 
         }
 

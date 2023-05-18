@@ -154,7 +154,7 @@ view('header', ['title' => 'Učiteľ']);
                                         .$result["recieved"]."</td><td>"
                                         .$result["submited"]."</td><td>"
                                         .$pointsGot."</td><td>"
-                                        .$result["totalPoints"]."</td></tr>";
+                                        .$result["total_points"]."</td></tr>";
                                         
                                     }
                                 
@@ -162,8 +162,6 @@ view('header', ['title' => 'Učiteľ']);
                                     echo $e->getMessage();
                                 }
 
-                                
-                            
                             ?>
                             
                         </tbody>
