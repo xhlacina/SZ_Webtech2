@@ -82,9 +82,6 @@ if(isset($_GET['type'])){
             $stmt = $db->query($query); 
             $student = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $recieved =$student[0]['recieved']+1;
-            $max=$student[0]['max_points']+$assignments[0]['points'];
-            $query = 'UPDATE students SET recieved='.$recieved.', max_points='.$max.'';
             $stmt = $db->query($query); 
         }
 
