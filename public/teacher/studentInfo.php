@@ -68,6 +68,7 @@ view('header', ['title' => 'Info o studentovi']);
 
                         ?>
                         <a href="addFile.php" class="list-group-item list-group-item-action"><?php echo $lang['add_file'] ?></a>
+                        <a href="guideTeacher.php" class="list-group-item list-group-item-action "><?php echo $lang['guide']; ?></a>
                     </div>
                 </div>
             </div>
