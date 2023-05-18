@@ -49,7 +49,7 @@ view('header', ['title' => 'Učiteľ']);
         </div>
         <div class="col-lg-9 col-md-10 col-sm-12">
             <!-- Main content goes here -->
-            <div class="container">
+            <div class="container" id="makepdf">
                   <h1><?php echo $lang['guide']; ?></h1>
                   <ol>
                     <li><?php echo $lang['teacher1']; ?></li>
@@ -59,6 +59,7 @@ view('header', ['title' => 'Učiteľ']);
                     <li><?php echo $lang['teacher5']; ?></li>
                   </ol>   
             </div>
+            <button id="pdfButton"><?php echo $lang['pdf_button']; ?></button>
         </div>
     </div>
 </div>
@@ -68,3 +69,4 @@ view('header', ['title' => 'Učiteľ']);
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
+<script src="../pdfLogic.js"></script>

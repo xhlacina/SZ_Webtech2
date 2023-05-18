@@ -44,7 +44,8 @@ $lang = array(
     "teacher2" => "Môžete si aj vybrať konkrétneho študenta a klinknutím na jeho meno si viete zobraziť jeho informácie.",
     "teacher3" => "V oboch oknách si viete stiahnuť CSV súbor tabuliek.",
     "teacher4" => "V okne Pridať súbor si zvolte súbor úloh pre študentov.",
-    "teacher5" => "Môžete nastaviť počet bodov za príklady a aj dátum pre deadline."
+    "teacher5" => "Môžete nastaviť počet bodov za príklady a aj dátum pre deadline.",
+    "pdf_button" => "Vygeneruj PDF"
 );
 
 ?>

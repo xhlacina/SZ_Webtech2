@@ -44,7 +44,8 @@ $lang = array(
     "teacher2" => "You can choose specific student and by clicking on their name you will be shown all information about them.",
     "teacher3" => "You can download CSV file of tables in both tabs.",
     "teacher4" => "In Add file you can choose file of tasks for students.",
-    "teacher5" => "You can set number of points for tasks and deadline day."
+    "teacher5" => "You can set number of points for tasks and deadline day.",
+    "pdf_button" => "Generate PDF"
 );
 
 ?>
