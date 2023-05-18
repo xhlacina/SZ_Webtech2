@@ -75,16 +75,16 @@ if(isset($_GET['type'])){
         if(sizeof($assignments)==0){
             echo "Nemožno priradiť ďalšie úlohy.";
         }else{
-            $query = 'INSERT INTO student_assignment (student_id,assignment_id,submited,result,correct,student_score) VALUES (1,'.$assignments[0]['id'].',0,0,"'.$assignments[0]['result'].'",0)';
+            $query = 'INSERT INTO student_assignment (student_id,assignment_id,submited,result,correct,student_score) VALUES (1,'.$assignments[0]['id'].',0,0,'.$assignments[0]['result'].',0)';
             $stmt = $db->query($query); 
 
             $query = 'select * from students where id=1';
             $stmt = $db->query($query); 
             $student = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
 
-            $query = 'INSERT INTO student_assignment (student_id,assignment_id,submited,result,correct,student_score) VALUES (1,'.$assignments[0]['id'].',0,0,"'.$assignments[0]['result'].'",0)';
-          
+            $recieved =$student[0]['recieved']+1;
+            $max=$student[0]['max_points']+$assignments[0]['points'];
+            $query = 'UPDATE students SET recieved='.$recieved.', max_points='.$max.'';
             $stmt = $db->query($query); 
         }
 
