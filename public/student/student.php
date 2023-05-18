@@ -61,12 +61,12 @@ function getRandomTask($filename){
     ];
 }
 
-function isSubmited($n){
+function isSubmited($n,$lang){
     if($n ==0){
-        return echo $lang["unsubmitted"];
+        return  $lang["unsubmitted"];
     }
     if($n ==1){
-        return echo $lang["submitted"];
+        return  $lang["submitted"];
     }
 }
 ?>
@@ -124,7 +124,7 @@ function isSubmited($n){
                                 foreach ($results as $result){
                                     echo "<tr><td>" . $result["type"]  
                                     . "</td><td>".$result["number"] 
-                                    . "</td><td>".isSubmited($result["submited"])
+                                    . "</td><td>".isSubmited($result["submited"],$lang)
                                     . "</td><td>".$result["result"] 
                                     . "</td><td>".$result["points"]
                                     ."</td><td>
