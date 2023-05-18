@@ -96,55 +96,9 @@ view('header', ['title' => 'Učiteľ']);
                                     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
                                     
 
-
                                     foreach($results as $result){
                                         $pointsGot = 0;
-                                        // Vladys dorob :)
-                                        
-                                        // API endpoint URL
-                                        $url = 'https://site104.webte.fei.stuba.sk:9001/compare';
 
-                                        // Custom data to send
-                                        $data = array(
-                                            'expr1' => '\expr 4',
-                                            'expr2' => '\expr 8/2'
-                                        );
-
-                                        // Convert the data to JSON
-                                        $jsonData = json_encode($data);
-
-                                        // Initialize cURL
-                                        $ch = curl_init($url);
-
-                                        // Set the request method to POST
-                                        curl_setopt($ch, CURLOPT_POST, 1);
-
-                                        // Set the JSON data
-                                        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-
-                                        // Set the appropriate headers
-                                        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                            'Content-Type: application/json',
-                                            'Content-Length: ' . strlen($jsonData)
-                                        ));
-
-                                        // Set option to receive the response as a string
-                                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-                                        // Execute the request
-                                        $response = curl_exec($ch);
-
-                                        // Check for errors
-                                        if (curl_errno($ch)) {
-                                            $error = curl_error($ch);
-                                            // Handle the error appropriately
-                                        } else {
-                                            // Process the response
-                                            echo $response;
-                                        }
-
-                                        // Close cURL
-                                        curl_close($ch);
                                         if ($response){
                                             $pointsGot = $pointsGot + $result["points"];
                                         }

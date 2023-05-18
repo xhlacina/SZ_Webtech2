@@ -52,6 +52,113 @@ if(isset($_GET['type'])){
 }
 if (isset($_POST['givenFormula'])) {
     var_dump($_POST['givenFormula']);
+
+    // DONE submited++ in student_assignment
+    try{
+        $query = " UPDATE webtech2.student_assignment SET submited = 1, result =".$_POST['givenFormula'];
+        $stmt = $db->query($query); 
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    // DONE submited++  in student
+    try{
+        $query = " UPDATE webtech2.students
+                    SET submited = 
+                    (SELECT count(submited) from webtech2.student_assignment 
+                    where student_id = 1 and submited = 1)";
+        $stmt = $db->query($query); 
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+    // get correct result from student_assignment
+    try{
+        $query = " SELECT correct FROM webtech2.student_assignment";
+        $stmt = $db->query($query); 
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+
+
+    // API endpoint URL
+    $url = 'https://site104.webte.fei.stuba.sk:9001/compare';
+
+    // Custom data to send
+    $data = array(
+        'expr1' => $_POST['givenFormula'],
+        'expr2' => $results["correct"]
+    );
+
+    // Convert the data to JSON
+    $jsonData = json_encode($data);
+
+    // Initialize cURL
+    $ch = curl_init($url);
+
+    // Set the request method to POST
+    curl_setopt($ch, CURLOPT_POST, 1);
+
+    // Set the JSON data
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
+
+    // Set the appropriate headers
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        'Content-Type: application/json',
+        'Content-Length: ' . strlen($jsonData)
+    ));
+
+    // Set option to receive the response as a string
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    // Execute the request
+    $response = curl_exec($ch);
+
+    // Check for errors
+    if (curl_errno($ch)) {
+        $error = curl_error($ch);
+        // Handle the error appropriately
+    } else {
+        echo $response;
+
+        if ($response){
+
+            // DONE update student_score in student_assignment
+            try{
+                $query = " UPDATE webtech2.student_assignment
+                            SET student_score = 
+                            (SELECT points from webtech2.assignment 
+                            where type =".$_GET['type']." and number = ".$_GET['number'].")";
+                $stmt = $db->query($query); 
+
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+
+            // DONE update total_points in student
+            try{
+                $query = " UPDATE webtech2.student
+                            SET total_points = total_points + 
+                            (SELECT student_score from webtech2.student_assignment 
+                            where type =".$_GET['type']." and number = ".$_GET['number'].")";
+                $stmt = $db->query($query); 
+
+            }catch(PDOException $e){
+                echo $e->getMessage();
+            }
+
+        }
+    }
+
+    // Close cURL
+    curl_close($ch);
+
+    
+
 }
 
 ?>
