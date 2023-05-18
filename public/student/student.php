@@ -1,5 +1,6 @@
 <?php
 include "./../../src/includes.php";
+include "./../../src/language.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -60,12 +61,12 @@ function getRandomTask($filename){
     ];
 }
 
-function isSubmited($n){
+function isSubmited($n, $lang){
     if($n ==0){
-        return "Neodovzdaná";
+        return $lang["unsubmitted"];
     }
     if($n ==1){
-        return "Odovzdaná";
+        return $lang["submitted"];
     }
 }
 ?>
@@ -77,6 +78,9 @@ function isSubmited($n){
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div>
+            <a href="student.php?lang=sk">SK</a> | <a href="student.php?lang=en">EN</a>
+        </div>
         <div style="color: #7676a7" class="navbar-brand ms-auto">
             <?php echo $email?>
             <a style="color: #ff3333" href="/src/logout.php">
@@ -90,8 +94,9 @@ function isSubmited($n){
         <div class="col-lg-2 col-md-4 col-sm-12">
             <div class="col-lg-6 col-md-4 col-sm-12">
                 <div class="list-group">
-                <a href="student.php" class="list-group-item list-group-item-action active ">Prehľad príkladov</a>
-                    <a href="generate.php" class="list-group-item list-group-item-action ">Vygeneruj príklad</a>
+                <a href="student.php" class="list-group-item list-group-item-action active "><?php echo $lang['view_tasks']; ?></a>
+                    <a href="generate.php" class="list-group-item list-group-item-action "><?php echo $lang['generate_task']; ?></a>
+                    <a href="guideStudent.php" class="list-group-item list-group-item-action "><?php echo $lang['guide']; ?></a>
                 </div>
             </div>
         </div>
@@ -101,11 +106,11 @@ function isSubmited($n){
                     <table id="allAssignments" class="table table-striped">
                     <thead>
                             <tr>
-                                <th>Meno Sady Úloh</th>
-                                <th>Číslo úlohy</th>
-                                <th>Stav úlohy</th>
-                                <th>Počet získaných bodov za príklad</th>
-                                <th>Max. počet bodov za príklad</th>
+                                <th><?php echo $lang['task_set_name']; ?></th>
+                                <th><?php echo $lang['task_number']; ?></th>
+                                <th><?php echo $lang['task_state']; ?></th>
+                                <th><?php echo $lang['received_points']; ?></th>
+                                <th><?php echo $lang['points_for_task']; ?></th>
                             </tr>
                         </thead>
                         <tbody id="table-content">
@@ -115,15 +120,17 @@ function isSubmited($n){
                             JOIN assignments a ON sa.assignment_id = a.id where student_id=1;'); 
                             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if(sizeof($results)==0){
-                                echo "<tr><td colspan='5' class='text-center'>Nemáte žiadne príklady</td></tr>";
+                                echo "<tr><td colspan='5' class='text-center'>" . $lang['no_tasks'] . "</td></tr>";
                             }else{
                                 foreach ($results as $result){
                                     echo "<tr><td>" . $result["type"]  
                                     . "</td><td>".$result["number"] 
-                                    . "</td><td>".isSubmited($result["submited"])
-                                    . "</td><td>".$result["result"] 
+                                    . "</td><td>".isSubmited($result["submited"], $lang)
+                                    . "</td><td>".$result["student_score"] 
                                     . "</td><td>".$result["points"]
-                                    ."</td></tr>";
+                                    ."</td><td>
+                                            <button type='button' class='btn btn-warning' onclick='edit(this)'>" . $lang['show'] . "</button>
+                                    </td></tr>";
                                 }
                             }
                                     
@@ -141,3 +148,4 @@ function isSubmited($n){
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
+<script src="student.js"></script>

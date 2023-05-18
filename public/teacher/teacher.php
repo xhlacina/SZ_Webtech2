@@ -3,6 +3,7 @@
 use function PHPSTORM_META\type;
 
 include "./../../src/includes.php";
+include "./../../src/language.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -39,6 +40,9 @@ view('header', ['title' => 'Učiteľ']);
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div>
+                <a href="teacher.php?lang=sk">SK</a> | <a href="teacher.php?lang=en">EN</a>
+            </div>
             <div style="color: #7676a7" class="navbar-brand ms-auto">
                 <?php echo $email?>
                 <a style="color: #ff3333" href="/src/logout.php">
@@ -52,9 +56,10 @@ view('header', ['title' => 'Učiteľ']);
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="col-lg-6 col-md-4 col-sm-12">
                     <div class="list-group">
-                        <a href="teacher.php" class="list-group-item list-group-item-action active">Všetci studenti</a>
-                        <a href="studentInfo.php" class="list-group-item list-group-item-action disabled">Študent</a>
-                        <a href="addFile.php" class="list-group-item list-group-item-action">Pridať súbor</a>
+                        <a href="teacher.php" class="list-group-item list-group-item-action active"><?php echo $lang['all_students'] ?></a>
+                        <a href="studentInfo.php" class="list-group-item list-group-item-action disabled"><?php echo $lang['student'] ?></a>
+                        <a href="addFile.php" class="list-group-item list-group-item-action"><?php echo $lang['add_file'] ?></a>
+                        <a href="guideTeacher.php" class="list-group-item list-group-item-action "><?php echo $lang['guide']; ?></a>
                     </div>
                 </div>
             </div>
@@ -63,14 +68,14 @@ view('header', ['title' => 'Učiteľ']);
 
                 <div class="container">
                     <table id="allStudentsTable" class="table table-striped">
-                        <h1>Všetci študenti</h1>
+                        <h1><?php echo $lang['all_students'] ?></h1>
                         <thead>
                             <tr>
-                                <th>Meno študenta</th>
-                                <th>Počet vypísaných úloh</th>
-                                <th>Počet odovzdaných úloh</th>
-                                <th>Získaný počet bodov</th>
-                                <th>Maximálny počet bodov</th>
+                                <th><?php echo $lang['student_name'] ?></th>
+                                <th><?php echo $lang['num_listed_tasks'] ?></th>
+                                <th><?php echo $lang['num_submit_tasks'] ?></th>
+                                <th><?php echo $lang['points_received'] ?></th>
+                                <th><?php echo $lang['max_points'] ?></th>
                             </tr>
                         </thead>
                         <tbody id="table-content">
@@ -80,77 +85,20 @@ view('header', ['title' => 'Učiteľ']);
                                     
                                     
                                 
-                                    $query = " SELECT s.id, s.name, s.recieved, s.submited, s.total_points, 
-                                                    sa.result, sa.correct, a.points
-                                                FROM webtech2.students s
-                                                INNER JOIN webtech2.student_assignment sa
-                                                ON sa.student_id = s.id
-                                                INNER JOIN webtech2.assignments a
-                                                ON a.id = sa.assignment_id
-                                                ORDER BY s.name";
+                                    $query = " SELECT * FROM webtech2.students";
                                     $stmt = $db->query($query); 
                                     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);  
                                     
 
-
                                     foreach($results as $result){
-                                        $pointsGot = 0;
-                                        // Vladys dorob :)
                                         
-                                        // API endpoint URL
-                                        $url = 'https://site104.webte.fei.stuba.sk:9001/compare';
-
-                                        // Custom data to send
-                                        $data = array(
-                                            'expr1' => '\expr 4',
-                                            'expr2' => '\expr 8/2'
-                                        );
-
-                                        // Convert the data to JSON
-                                        $jsonData = json_encode($data);
-
-                                        // Initialize cURL
-                                        $ch = curl_init($url);
-
-                                        // Set the request method to POST
-                                        curl_setopt($ch, CURLOPT_POST, 1);
-
-                                        // Set the JSON data
-                                        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData);
-
-                                        // Set the appropriate headers
-                                        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-                                            'Content-Type: application/json',
-                                            'Content-Length: ' . strlen($jsonData)
-                                        ));
-
-                                        // Set option to receive the response as a string
-                                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-                                        // Execute the request
-                                        $response = curl_exec($ch);
-
-                                        // Check for errors
-                                        if (curl_errno($ch)) {
-                                            $error = curl_error($ch);
-                                            // Handle the error appropriately
-                                        } else {
-                                            // Process the response
-                                            echo $response;
-                                        }
-
-                                        // Close cURL
-                                        curl_close($ch);
-                                        if ($response){
-                                            $pointsGot = $pointsGot + $result["points"];
-                                        }
 
                                         echo 
                                         "<tr><td>". '<a href = "studentInfo.php?id='.$result["id"].'">' .$result["name"].'</a> '."</td><td>"
                                         .$result["recieved"]."</td><td>"
                                         .$result["submited"]."</td><td>"
-                                        .$pointsGot."</td><td>"
-                                        .$result["totalPoints"]."</td></tr>";
+                                        .$result["total_points"]."</td><td>"
+                                        .$result["max_points"]."</td></tr>";
                                         
                                     }
                                 
@@ -158,8 +106,6 @@ view('header', ['title' => 'Učiteľ']);
                                     echo $e->getMessage();
                                 }
 
-                                
-                            
                             ?>
                             
                         </tbody>

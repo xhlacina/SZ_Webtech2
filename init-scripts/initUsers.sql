@@ -44,6 +44,7 @@ CREATE TABLE `students` (
   `recieved` int DEFAULT NULL,
   `submited` int DEFAULT NULL,
   `total_points` int DEFAULT NULL,
+  `max_points` int DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -54,7 +55,7 @@ CREATE TABLE `student_assignment` (
   `assignment_id` int NOT NULL,
   `submited` tinyint DEFAULT NULL,
   `result` text NOT NULL,
-  `correct` tinyint DEFAULT NULL,
+  `correct` text,
   `student_score` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_student_idx` (`student_id`),

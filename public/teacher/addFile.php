@@ -1,5 +1,6 @@
 <?php
 include "./../../src/includes.php";
+include "./../../src/language.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -58,7 +59,7 @@ if (isset($_POST['submitFile'])) {
     else{
         $date = null;
     }
-    $i = 0;
+    $i = 1;
     foreach ($assignmentsArray as $assignment){
         $query = "  INSERT INTO assignments (type, number, points, date, result)
                         VALUES (
@@ -75,7 +76,7 @@ if (isset($_POST['submitFile'])) {
         $stmt->bindParam(":number", $i, PDO::PARAM_STR);
         $stmt->bindParam(":points", $points, PDO::PARAM_STR);
         $stmt->bindParam(":date", $date, PDO::PARAM_STR);
-        $stmt->bindParam(":result", $assignmentsArray["equations"][$i], PDO::PARAM_STR);
+        $stmt->bindParam(":result", $assignmentsArray["equations"][$i-1], PDO::PARAM_STR);
 
         if ($stmt->execute()) {
         } else {
@@ -112,6 +113,9 @@ if (isset($_POST['submitFile'])) {
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div>
+                <a href="addFile.php?lang=sk">SK</a> | <a href="addFile.php?lang=en">EN</a>
+            </div>
             <div style="color: #7676a7" class="navbar-brand ms-auto">
                 <?php echo $email?>
                 <a style="color: #ff3333" href="/src/logout.php">
@@ -125,9 +129,10 @@ if (isset($_POST['submitFile'])) {
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="col-lg-6 col-md-4 col-sm-12">
                     <div class="list-group">
-                        <a href="teacher.php" class="list-group-item list-group-item-action">Všetci študenti</a>
-                        <a href="studentInfo.php" class="list-group-item list-group-item-action disabled">Študent</a>
-                        <a href="addFile.php" class="list-group-item list-group-item-action active">Pridať súbor</a>
+                        <a href="teacher.php" class="list-group-item list-group-item-action"><?php echo $lang['all_students'] ?></a>
+                        <a href="studentInfo.php" class="list-group-item list-group-item-action disabled"><?php echo $lang['student'] ?></a>
+                        <a href="addFile.php" class="list-group-item list-group-item-action active"><?php echo $lang['add_file'] ?></a>
+                        <a href="guideTeacher.php" class="list-group-item list-group-item-action "><?php echo $lang['guide']; ?></a>
                     </div>
                 </div>
             </div>
@@ -136,7 +141,7 @@ if (isset($_POST['submitFile'])) {
 
                 <div class="container text-center">
                     <form method="post">
-                    <label for="exerciseSelect">Súbor: </label>
+                    <label for="exerciseSelect"><?php echo $lang['file'] ?></label>
                         <select name="exerciseSelect" id="exercises">
                         <?php 
                                 $dir="../../exams";
@@ -150,18 +155,18 @@ if (isset($_POST['submitFile'])) {
                         ?>
                         </select>
                         <br><br>
-                        <label for="points">Počet bodov za príklady v súbore: </label>
+                        <label for="points"><?php echo $lang['file_tasks_points'] ?></label>
                         <input type="number" name="points" id="points" value="1">
                         <br><br>
-                        <label for="ifDeadline">Chcete pridat deadline odovzdania?</label>
+                        <label for="ifDeadline"><?php echo $lang['add_deadline'] ?></label>
                         <input type="checkbox" name="ifDeadline" id="deadlineCheckbox" onclick="checkboxFunction()">
                         <br><br>
                         <div id="deadline" class="d-none">
-                            <label for="deadline">Datum deadline: </label>
+                            <label for="deadline"><?php echo $lang['deadline'] ?></label>
                             <input type="date" name="deadline" id="deadlineDate">
                             <br><br>
                         </div>
-                        <button type="submit" name="submitFile">Pridať súbor</button>
+                        <button type="submit" name="submitFile"><?php echo $lang['add_file'] ?></button>
                     </form>
                 </div>
 
