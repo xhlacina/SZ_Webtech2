@@ -23,8 +23,8 @@ function parseLatexFile($filename) {
     $content = file_get_contents($filename);
 
     // 2. Define regular expressions
-    $taskRegex = '/\\begin{task}(.?)\\includegraphics{(.?)}.?\\end{task}/s';
-    $solutionRegex = '/\\begin{equation*?}(.?)\\end{equation*?}/s';
+    $taskRegex = '/\\\\begin\{task\}((?:(?!\\\\end\{task\}).)*)\\\\includegraphics\{([^}]*)\}/s';
+    $solutionRegex = '/\\\\begin\{equation\*\}((?:(?!\\\\end\{equation\*\}).)*)\\\\end\{equation\*\}/s';
 
     // 3. Get all matches
     preg_match_all($taskRegex, $content, $taskMatches);
@@ -32,13 +32,13 @@ function parseLatexFile($filename) {
 
     // Clean up the matches
     $tasks = array_map('trim', $taskMatches[1]);
-    $imgs = array_map('trim', $taskMatches[2]);
+    $images = array_map('trim', $taskMatches[2]);
     $equations = array_map('trim', $solutionMatches[1]);
 
     // 4. Return the results
     return [
         'tasks' => $tasks,
-        'images' => $imgs,
+        'images' => $images,
         'equations' => $equations
     ];
 }
@@ -123,7 +123,9 @@ function isSubmited($n){
                                     . "</td><td>".isSubmited($result["submited"])
                                     . "</td><td>".$result["result"] 
                                     . "</td><td>".$result["points"]
-                                    ."</td></tr>";
+                                    ."</td><td>
+                                            <button type='button' class='btn btn-warning' onclick='edit(this)'>Zobraziť</button>
+                                    </td></tr>";
                                 }
                             }
                                     
@@ -141,3 +143,4 @@ function isSubmited($n){
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/7c8801c017.js" crossorigin="anonymous"></script>
+<script src="student.js"></script>
