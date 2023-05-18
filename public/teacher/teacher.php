@@ -59,6 +59,7 @@ view('header', ['title' => 'Učiteľ']);
                         <a href="teacher.php" class="list-group-item list-group-item-action active"><?php echo $lang['all_students'] ?></a>
                         <a href="studentInfo.php" class="list-group-item list-group-item-action disabled"><?php echo $lang['student'] ?></a>
                         <a href="addFile.php" class="list-group-item list-group-item-action"><?php echo $lang['add_file'] ?></a>
+                        <a href="guideTeacher.php" class="list-group-item list-group-item-action "><?php echo $lang['guide']; ?></a>
                     </div>
                 </div>
             </div>

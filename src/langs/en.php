@@ -40,6 +40,11 @@ $lang = array(
     "student3" => "In Overview of tasks you have overview about all of your tasks, that were genereted for you.",
     "student4" => "By pressing button Show you can open the task.",
     "student5" => "Solve given task and press button Submit.",
+    "teacher1" => "In All students tab is overview of all students and their tasks, and you can manage table to your needs.",
+    "teacher2" => "You can choose specific student and by clicking on their name you will be shown all information about them.",
+    "teacher3" => "You can download CSV file of tables in both tabs.",
+    "teacher4" => "In Add file you can choose file of tasks for students.",
+    "teacher5" => "You can set number of points for tasks and deadline day."
 );
 
 ?>
