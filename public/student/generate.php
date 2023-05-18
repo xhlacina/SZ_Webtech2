@@ -1,5 +1,6 @@
 <?php
 include "./../../src/includes.php";
+include "./../../src/language.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -102,6 +103,9 @@ echo "\n";
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <div>
+            <a href="generate.php?lang=sk">SK</a> | <a href="generate.php?lang=en">EN</a>
+        </div>
         <div style="color: #7676a7" class="navbar-brand ms-auto">
             <?php echo $email?>
             <a style="color: #ff3333" href="/src/logout.php">
@@ -115,8 +119,8 @@ echo "\n";
         <div class="col-lg-3 col-md-4 col-sm-12">
             <div class="col-lg-3 col-md-4 col-sm-12">
                 <div class="list-group">
-                    <a href="student.php" class="list-group-item list-group-item-action ">Prehľad príkladov</a>
-                    <a href="generate." class="list-group-item list-group-item-action active">Vygeneruj príklad</a>
+                    <a href="student.php" class="list-group-item list-group-item-action "><?php echo $lang['view_tasks'] ?></a>
+                    <a href="generate." class="list-group-item list-group-item-action active"><?php echo $lang['generate_task'] ?></a>
                 </div>
             </div>
         </div>
