@@ -13,7 +13,22 @@ $lang = array(
     "task_number" => "Task number",
     "task_state" => "State of a task",
     "received_points" => "Points received for a task",
-    "points_for_task" => "Max points for a task"
+    "points_for_task" => "Max points for a task",
+    "no_tasks" => "No tasks were found",
+    "all_students" => "All students",
+    "student" => "Student",
+    "add_file" => "Add file",
+    "student_name" => "Name of a student",
+    "num_listed_tasks" => "Number of listed tasks",
+    "num_submit_tasks" => "Number of submitted tasks",
+    "points_received" => "Scored points",
+    "max_points" => "Max points",
+    "file" => "File: ",
+    "file_tasks_points" => "Number of points for tasks in file: ",
+    "add_deadline" => "Do you want to add a submission deadline?",
+    "deadline" => "Deadline date: ",
+    "result" => "Result",
+    "result_correctness" => "Correctness of the result"
 );
 
 ?>

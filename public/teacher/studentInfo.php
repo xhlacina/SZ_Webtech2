@@ -1,5 +1,6 @@
 <?php
 include "./../../src/includes.php";
+include "./../../src/language.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -39,6 +40,9 @@ view('header', ['title' => 'Info o studentovi']);
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div>
+                <a href="studentInfo.php?lang=sk">SK</a> | <a href="studentInfo.php?lang=en">EN</a>
+            </div>
             <div style="color: #7676a7" class="navbar-brand ms-auto">
                 <?php echo $email?>
                 <a style="color: #ff3333" href="/src/logout.php">
@@ -52,7 +56,7 @@ view('header', ['title' => 'Info o studentovi']);
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="col-lg-6 col-md-4 col-sm-12">
                     <div class="list-group">
-                        <a href="teacher.php" class="list-group-item list-group-item-action ">Všetci študenti</a>
+                        <a href="teacher.php" class="list-group-item list-group-item-action "><?php echo $lang['all_students'] ?></a>
 
                         <?php
 
@@ -63,7 +67,7 @@ view('header', ['title' => 'Info o studentovi']);
                             echo "<a href='#' class='list-group-item list-group-item-action active'>".$results[0]['name']."</a>"
 
                         ?>
-                        <a href="addFile.php" class="list-group-item list-group-item-action">Pridať súbor</a>
+                        <a href="addFile.php" class="list-group-item list-group-item-action"><?php echo $lang['add_file'] ?></a>
                     </div>
                 </div>
             </div>
@@ -91,12 +95,12 @@ view('header', ['title' => 'Info o studentovi']);
                         
                         <thead>
                             <tr>
-                                <th>Meno sady úloh</th>
-                                <th>Číslo úlohy</th>
-                                <th>Stav úlohy</th>
-                                <th>Výsledok</th>
-                                <th>Správnosť výsledku</th>
-                                <th>Počet získaných bodov za príklad</th>
+                                <th><?php echo $lang['task_set_name'] ?></th>
+                                <th><?php echo $lang['task_number'] ?></th>
+                                <th><?php echo $lang['task_state'] ?></th>
+                                <th><?php echo $lang['result'] ?></th>
+                                <th><?php echo $lang['result_correctness'] ?></th>
+                                <th><?php echo $lang['received_points'] ?></th>
                             </tr>
                         </thead>
                         <tbody id="table-content">

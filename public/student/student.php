@@ -119,7 +119,7 @@ function isSubmited($n){
                             JOIN assignments a ON sa.assignment_id = a.id where student_id=1;'); 
                             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             if(sizeof($results)==0){
-                                echo "<tr><td colspan='5' class='text-center'>Nemáte žiadne príklady</td></tr>";
+                                echo "<tr><td colspan='5' class='text-center'>" . $lang['no_tasks'] . "</td></tr>";
                             }else{
                                 foreach ($results as $result){
                                     echo "<tr><td>" . $result["type"]  

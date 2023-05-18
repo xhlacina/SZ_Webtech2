@@ -3,6 +3,7 @@
 use function PHPSTORM_META\type;
 
 include "./../../src/includes.php";
+include "./../../src/language.php";
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -39,6 +40,9 @@ view('header', ['title' => 'Učiteľ']);
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <div>
+                <a href="teacher.php?lang=sk">SK</a> | <a href="teacher.php?lang=en">EN</a>
+            </div>
             <div style="color: #7676a7" class="navbar-brand ms-auto">
                 <?php echo $email?>
                 <a style="color: #ff3333" href="/src/logout.php">
@@ -52,9 +56,9 @@ view('header', ['title' => 'Učiteľ']);
             <div class="col-lg-2 col-md-4 col-sm-12">
                 <div class="col-lg-6 col-md-4 col-sm-12">
                     <div class="list-group">
-                        <a href="teacher.php" class="list-group-item list-group-item-action active">Všetci studenti</a>
-                        <a href="studentInfo.php" class="list-group-item list-group-item-action disabled">Študent</a>
-                        <a href="addFile.php" class="list-group-item list-group-item-action">Pridať súbor</a>
+                        <a href="teacher.php" class="list-group-item list-group-item-action active"><?php echo $lang['all_students'] ?></a>
+                        <a href="studentInfo.php" class="list-group-item list-group-item-action disabled"><?php echo $lang['student'] ?></a>
+                        <a href="addFile.php" class="list-group-item list-group-item-action"><?php echo $lang['add_file'] ?></a>
                     </div>
                 </div>
             </div>
@@ -63,14 +67,14 @@ view('header', ['title' => 'Učiteľ']);
 
                 <div class="container">
                     <table id="allStudentsTable" class="table table-striped">
-                        <h1>Všetci študenti</h1>
+                        <h1><?php echo $lang['all_students'] ?></h1>
                         <thead>
                             <tr>
-                                <th>Meno študenta</th>
-                                <th>Počet vypísaných úloh</th>
-                                <th>Počet odovzdaných úloh</th>
-                                <th>Získaný počet bodov</th>
-                                <th>Maximálny počet bodov</th>
+                                <th><?php echo $lang['student_name'] ?></th>
+                                <th><?php echo $lang['num_listed_tasks'] ?></th>
+                                <th><?php echo $lang['num_submit_tasks'] ?></th>
+                                <th><?php echo $lang['points_received'] ?></th>
+                                <th><?php echo $lang['max_points'] ?></th>
                             </tr>
                         </thead>
                         <tbody id="table-content">
