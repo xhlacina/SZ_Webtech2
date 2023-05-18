@@ -37,25 +37,17 @@ if(isset($_POST["submit"])){
                 else
 //                    var_dump("hello1");
                     header("location: /public/teacher/teacher.php");
-            } else
+            } else {
                 $errmsg .= "<p style='color: red'>Nesprávne meno alebo heslo.</p>";
-                echo "<script>
-                    error = document.getElementById('errorMessage');
-                    error.innerHTML = '<?php echo $errmsg; ?>
-                    </script>";
-        } else
+                header("location: /index.php?errmsg=$errmsg");
+            }
+        } else {
             $errmsg .= "<p style='color: red'>Nesprávne meno alebo heslo.</p>";
-            echo "<script>
-                    error = document.getElementById('errorMessage');
-                    error.innerHTML = '<?php echo $errmsg; ?>
-                    </script>";
+            header("location: /index.php?errmsg=$errmsg");
+        }
     }
 
     unset($stmt);
     unset($db);
 }
 ?>
-<script>
-    error = document.getElementById("errorCode");
-    error.innerHTML = "<?php echo $errmsg; ?>";
-</script>

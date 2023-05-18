@@ -2,11 +2,15 @@
 
 Github semestrálneho zadania predmetu Webové technológie 2 na FEI STU. Úlohou zadania bolo naprogramovať aplikáciu pre generovanie a vypracovávanie matematických úloh.
 
-!!! **DO NOT PUSH TO MAIN BRANCH** !!!
-
 ## Inštalácia
 
-Projekt je možné spustiť ako docker balíček spustením súboru [docker-compose.yml](./docker-compose.yml). Pre úspešné skompilovanie súboru je potrebné mať nainštalovanú a spustenú službu [docker](https://www.docker.com/). Po spustení sa vytvorí docker **kontajner s aplikáciou** a rovnako aj **kontajner s databázou**. Pre tento účel bola použitá databáza mySQL. 
+Projekt je možné spustiť ako docker balíček spustením súboru [docker-compose.yml](./docker-compose.yml).
+
+```bash
+docker-compose up --build
+```
+
+Pre úspešné skompilovanie súboru je potrebné mať nainštalovanú a spustenú službu [docker](https://www.docker.com/). Po spustení sa vytvorí docker **kontajner s aplikáciou** a rovnako aj **kontajner s databázou**. Pre tento účel bola použitá databáza mySQL.
 Pri inicializácii databázy sa automaticky vytvoria dvaja používatelia, ktorých dáta sú spomenuté v sekcii [Použitie](#usage)
 
 Druhou možnosťou je použitie webtech2 servera na linke
@@ -33,14 +37,14 @@ Každá rola má možnosť pristupovať len k ich na to určenej časti aplikác
 
 ### Validation API
 
-Beží na adrese https://site104.webte.fei.stuba.sk:9001/ na základe [FastAPI](https://fastapi.tiangolo.com/) kniznice pre python. Ak tento server nie je spustený je potrené dostať sa dostať na adresu jej použitia v projekte a manuálne ju spustiť. 
+Beží na adrese https://site104.webte.fei.stuba.sk:9001/ na základe [FastAPI](https://fastapi.tiangolo.com/) kniznice pre python. Ak tento server nie je spustený je potrené dostať sa dostať na adresu jej použitia v projekte a manuálne ju spustiť.
 
 Adresa z root:
 ```bash
 cd /var/www/site104.webte.fei.stuba.sk/FastApi/
 ```
 
-Spustenie: 
+Spustenie:
 ```bash
 uvicorn main:app --host 0.0.0.0 --port 9001 --ssl-keyfile /home/xhlacina/certs/webte.fei.stuba.sk.key --ssl-certfile /home/xhlacina/certs/webte_fei_stuba_sk.pem
 ```
@@ -61,7 +65,34 @@ Content-Type: application/json
 
 ## Licencia
 
-Tento projekt je autorský projekt a jeho distribúcia nie je povolená bez zvolenia jedného z autorov.
+Tento projekt je autorský projekt a jeho distribúcia nie je povolená bez zvolenia autorov.
+
+## Distribúcia
+
+Projekt je dostupný ako public repozitár na [linku](https://github.com/xhlacina/SZ_Webtech2). Speciálne povolenie na distribúciu udelujeme **doc. Ing. Kataríne Žákovej, PhD.**
+
+## Rozdelenie úloh
+
+**Vladimír:**
+- [x] prihlasovanie sa do aplikácie (študent, učiteľ) + Basic GUI of whole app
+- [x] Kontrola správnosti výsledku - API
+- [x] Docker balíček
+
+**Martin:**
+- [x] Kontrola správnosti výsledku - in APP
+- [x] GUI a funkcionalita učiteľa
+- [x] Export do csv a pdf
+
+Adam:
+- [x] GUI a funkcionalita študenta (vrátane matematického editora)
+
+Dominik:
+- [x] dvojjazyčnosť
+- [x] Návody
+- [x] Video
+
+- [x] Používanie verzionovacieho systému všetkými členmi tímu
+- [x] Finalizácia aplikácie
 
 ## Vypracovali
 

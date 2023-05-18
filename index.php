@@ -2,6 +2,9 @@
 include "./src/includes.php";
 include "./src/language.php";
 
+if (isset($_GET['errmsg'])) {
+    $errmsg = $_GET['errmsg'];
+}
 if (isset($_SESSION['access_token']) && $_SESSION['access_token'] || isset($_SESSION['loggedin']) && $_SESSION["loggedin"]) {
     if ($_SESSION['role'] == 'Student')
         header("location: /public/student/student.php");
@@ -18,14 +21,6 @@ view('header', ['title' => 'Hlavná Stránka']);
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div>
-            <a href="index.php?lang=sk">SK</a> | <a href="index.php?lang=en">EN</a>
-        </div>
-<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-<!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
-<!--            </ul>-->
-
-<!--        </div>-->
     </div>
 </nav>
 <section class="vh-100">
@@ -39,7 +34,7 @@ view('header', ['title' => 'Hlavná Stránka']);
                             <form class="mx-1 mx-md-4" method="post" action="login.php">
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <label class="form-label" for="email"><?php echo $lang['email'] ?></label>
+                                    <label class="form-label" for="email">Email</label>
                                     <input type="text" id="email" name="email" class="form-control" required/>
                                     <div class="invalid-feedback">
                                     <?php echo $lang['invalid_email'] ?>
@@ -54,11 +49,11 @@ view('header', ['title' => 'Hlavná Stránka']);
                                     </div>
                                 </div>
                                 <p id="errorMessage"></p>
-<!--                                --><?php
-//                                if (!empty($errmsg)) {
-//                                    echo $errmsg;
-//                                }
-//                                ?>
+                                <?php
+                                if (!empty($errmsg)) {
+                                    echo $errmsg;
+                                }
+                                ?>
 
                                 <!-- Submit button -->
                                 <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
