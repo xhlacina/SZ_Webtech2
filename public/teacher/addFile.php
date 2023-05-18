@@ -76,7 +76,7 @@ if (isset($_POST['submitFile'])) {
         $stmt->bindParam(":number", $i, PDO::PARAM_STR);
         $stmt->bindParam(":points", $points, PDO::PARAM_STR);
         $stmt->bindParam(":date", $date, PDO::PARAM_STR);
-        $stmt->bindParam(":result", $assignmentsArray["equations"][$i], PDO::PARAM_STR);
+        $stmt->bindParam(":result", $assignmentsArray["equations"][$i-1], PDO::PARAM_STR);
 
         if ($stmt->execute()) {
         } else {
