@@ -1,6 +1,6 @@
 version: "3"
 services:
-  my-service:
+  app-service:
     build:
       context: .
       dockerfile: Dockerfile
