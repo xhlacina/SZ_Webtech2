@@ -27,9 +27,8 @@ function parseLatexFile($filename) {
     $content = file_get_contents($filename);
 
     // 2. Define regular expressions
-//    $taskRegex = '/\\begin{task}(.?)\\includegraphics{(.?)}.?\\end{task}/s';
-    $taskRegex = '/\\begin{task}(.?)\\\\includegraphics{(.?)}.?\\end{task}/s';
-    $solutionRegex = '/\\begin{equation*?}(.?)\\end{equation*?}/s';
+    $taskRegex = '/\\\\begin\{task\}((?:(?!\\\\end\{task\}).)*)\\\\includegraphics\{([^}]*)\}/s';
+    $solutionRegex = '/\\\\begin\{equation\*\}((?:(?!\\\\end\{equation\*\}).)*)\\\\end\{equation\*\}/s';
 
     // 3. Get all matches
     preg_match_all($taskRegex, $content, $taskMatches);
