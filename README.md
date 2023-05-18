@@ -66,7 +66,7 @@ Tento projekt je autorský projekt a jeho distribúcia nie je povolená bez zvol
 
 ## Distribúcia
 
-Projekt je dostupný ako public repozitár na [linku](https://github.com/xhlacina/SZ_Webtech2). Speciálne povolenie na distribúciu udelujeme **doc. Ing. Kataríne Žákovej, PhD.**
+Projekt je dostupný ako public repozitár na [linku](https://github.com/xhlacina/SZ_Webtech2). Špeciálne povolenie na distribúciu udelujeme **doc. Ing. Kataríne Žákovej, PhD.**
 
 ## Rozdelenie úloh
 
