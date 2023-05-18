@@ -61,15 +61,13 @@ function getRandomTask($filename){
     ];
 }
 
-function isSubmited($n){
-    
+function isSubmited($n, $lang){
     if($n ==0){
         return $lang["unsubmitted"];
     }
     if($n ==1){
         return $lang["submitted"];
     }
-    
 }
 ?>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
